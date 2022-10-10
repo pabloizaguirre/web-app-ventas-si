@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block register %}{% endblock%}
+{% block carrito %}{% endblock%}
+
+{% block content%}
+	<div class = "informacionPelicula">
+		 <img src = {{ pelis.poster }} alt = {{ pelis.titulo }}>
+			<div class = "descripcionPelicula">
+				<p><b>Titulo: </b>{{ pelis.titulo }}</p><br>
+				<p><b>Fecha: </b>{{ pelis.año }}</p><br>
+				<p><b>Sinopsis: </b>{{ pelis.sinopsis }}</p><br>
+				<p><b>Criticas: </b>{{ pelis.criticas }}</p><br>
+			</div>
+	</div>
+
+	<div class = "BotonyValoracion">
+		
+	</div>
+ {% endblock %}
