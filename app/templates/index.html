@@ -5,7 +5,6 @@
 {% endblock%}
 
 {% block register %}
-   <a href="{{ url_for('registro') }}">registro</a>
 {% endblock%}
 
 {% block carrito %}
@@ -20,11 +19,12 @@
  </form>
 
 <div id="container" style="width:500px">
-	<div id="content" style="background-color:#EEEEEE;height:200px;width:400px; float:left;">
-    <ul>
     {% for item in movies %}
-    <li>{{ item.titulo }}</li>
+    <div class="movie-container">
+        <a href="{{ url_for('descripcion') ~ "?film_id=" ~ item.id }}">
+        {{ item.titulo }}
+    </a>
+    </div>
     {% endfor %}
-    <ul></div>
 </div>
 {% endblock %}

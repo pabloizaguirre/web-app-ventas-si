@@ -30,7 +30,7 @@ def login():
             session['usuario'] = request.form['username']
             session.modified=True
             # se puede usar request.referrer para volver a la pagina desde la que se hizo login
-            return redirect(url_for('indexregistrado'))
+            return redirect(url_for('index'))
         else:
             # aqui se le puede pasar como argumento un mensaje de login invalido
             return render_template('login.html', title = "Sign In")
@@ -66,9 +66,16 @@ def indexregistrado():
 
 @app.route('/carrito', methods=['GET', 'POST'])
 def carrito():
-    return render_template('carrito.html')
+	return render_template('carrito.html')
 
-@app.route('/descripcion/<peliseleccionada>', methods=['GET', 'POST'])
-def descripcionPelicula(peliseleccionada):
+@app.route('/descripcion', methods=['GET', 'POST'])
+def descripcion():
+	id = request.args.get("film_id", type=int)
 	listaPeliculas = catalogue["peliculas"]
+	for pelicula in listaPeliculas:
+		if pelicula['id'] == id:
+			peli = pelicula
+			break
+	
+	return render_template('descripcion.html', peli = peli)
 	
