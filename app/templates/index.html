@@ -13,18 +13,29 @@
 
 {% block content %}
 
+<script>
+    window.onload = function setRandomColors() {
+        const elements = document.getElementsByClassName('movie-container')
+        for (const element of elements) {
+            const num = parseFloat(element.id)
+            element.style.backgroundColor = "hsl(" + 360 * (num%15)/15 + ',' +
+            (25 + 70 * (num%15)/15) + '%,' + 
+            (85 + 10 * (num%15)/15) + '%)'
+        }
+    }
+</script>
+
 <form name = "busqueda-drop" method="POST">
             	<input type="text" name = "texto_busqueda" class = "search" placeholder="Search..">
             	<input type="submit" name="submit" class = "submit" value = "Search"/>
  </form>
-
-<div id="container" style="width:500px">
-    {% for item in movies %}
-    <div class="movie-container">
-        <a href="{{ url_for('descripcion') ~ "?film_id=" ~ item.id }}">
-        {{ item.titulo }}
-    </a>
-    </div>
-    {% endfor %}
+<div id="container">
+{% for item in movies %}
+<div class="movie-container", id="{{ item.id }}" onclick="location.href='{{ url_for('descripcion') ~ "?film_id=" ~ item.id }}';" style="cursor: pointer;">
+    <img src=" ../static/img/avengers.jpeg ">
+    {{ item.titulo }}
 </div>
+{% endfor %}
+</div>
+
 {% endblock %}

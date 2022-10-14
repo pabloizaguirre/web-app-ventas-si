@@ -1,17 +1,17 @@
 body {
-    background-color: rgb(200, 250, 30)
-}
-
-#container {
-	height: 200px;
-	width: 150px;
-	border: 0px solid #ddd;
-	background: #f1f1f1;
-	overflow-y: scroll;
-	background-color: rgb(200, 250, 30)
+	background-color: #F5F5F5;
 }
 
 .movie-container {
+	border-radius: 20px;
+	padding: 10px;
+	height: 150px;
 	background-color: rgb(200, 200, 200);
-	border: 1px solid #ddd;
+	margin-bottom: 1rem;
+	box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+.movie-container img {
+	width: auto;
+	height: 100%;
 }
