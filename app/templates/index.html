@@ -7,9 +7,6 @@
 {% block register %}
 {% endblock%}
 
-{% block carrito %}
-	<a href="{{ url_for('carrito') }}">carrito</a>
-{% endblock%}
 
 {% block content %}
 
@@ -18,9 +15,9 @@
         const elements = document.getElementsByClassName('movie-container')
         for (const element of elements) {
             const num = parseFloat(element.id)
-            element.style.backgroundColor = "hsl(" + 360 * (num%15)/15 + ',' +
-            (25 + 70 * (num%15)/15) + '%,' + 
-            (85 + 10 * (num%15)/15) + '%)'
+            element.style.backgroundColor = "hsl(" + 360 * ((num*13)%15)/15 + ',' +
+            (25 + 70 * ((num*13)%15)/15) + '%,' + 
+            (85 + 10 * ((num*13)%15)/15) + '%)'
         }
     }
 </script>
@@ -32,8 +29,13 @@
 <div id="container">
 {% for item in movies %}
 <div class="movie-container", id="{{ item.id }}" onclick="location.href='{{ url_for('descripcion') ~ "?film_id=" ~ item.id }}';" style="cursor: pointer;">
-    <img src=" ../static/img/avengers.jpeg ">
-    {{ item.titulo }}
+    <img src=" {{ url_for('static', filename='img/' + item.poster) }} ">
+    <div class="movie-container-texto">
+        {{ item.titulo }}
+        <p id='movie-container-sinopsis'>
+            {{ item.sinopsis }}
+        </p>
+    </div>
 </div>
 {% endfor %}
 </div>

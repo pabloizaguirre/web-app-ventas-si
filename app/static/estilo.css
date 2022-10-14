@@ -3,6 +3,8 @@ body {
 }
 
 .movie-container {
+	display: flex;
+	flex-direction: row;
 	border-radius: 20px;
 	padding: 10px;
 	height: 150px;
@@ -14,4 +16,20 @@ body {
 .movie-container img {
 	width: auto;
 	height: 100%;
+	border-radius: 15px;
+	box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+.movie-container-texto {
+	margin-left: 20px;
+	font-size: x-large;
+}
+
+#movie-container-sinopsis {
+	font-size: medium;
+	text-overflow: ellipsis;
+    overflow: hidden;
+	display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
 }

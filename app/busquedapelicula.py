@@ -16,5 +16,5 @@ def filtrar(listapeliculas, request):
 		return listado
 
 	else:
-		return listapeliculas
+		return listapeliculas['peliculas']
 
