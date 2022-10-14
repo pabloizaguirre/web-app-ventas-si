@@ -1,5 +1,49 @@
 body {
 	background-color: #F5F5F5;
+	padding: 0;
+  	margin: 0;
+}
+
+.header {
+	position: fixed;
+	top: 0;
+	padding: 10px;
+	background-color: #c9c8d4;
+	width: 100%;
+}
+
+.side-bar {
+	position: fixed;
+	left: 0;
+	top: 40px;
+	width: 8%;
+	height: 95%;
+	display: flex;
+	padding: 1%;
+	flex-direction: column;
+	background-color: #cedbe4;
+}
+
+.footer {
+	position: fixed;
+	bottom: 0;
+	background-color: #F5F5F5;
+	padding: 10px;
+	width: 100%;
+	text-align: center;
+}
+
+.content {
+	position:absolute;
+	top: 40px;
+	right: 0;
+	width: 90%;
+	z-index:-1;
+}
+
+
+#container {
+	padding: 1%;
 }
 
 .movie-container {
@@ -32,4 +76,12 @@ body {
 	display: -webkit-box;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
+}
+
+.informacion-pelicula {
+	padding: 10px;
+}
+
+.informacion-pelicula img {
+	height: 300px;
 }

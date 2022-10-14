@@ -68,12 +68,20 @@ def indexregistrado():
 def carrito():
 	return render_template('carrito.html')
 
-@app.route('/descripcion', methods=['GET', 'POST'])
-def descripcion():
-	id = request.args.get("film_id", type=int)
+@app.route('/descripcion/<id_pelicula>', methods=['GET', 'POST'])
+def descripcion(id_pelicula):
+	if 'Add to cart' in request.args:
+		if 'carrito' in session:
+			print('a')
+			session['carrito'].append(['buenas', 'que tal'])
+		else:
+			session['carrito'] = ['hey']
+			print(session['carrito'])
+			print('b')
+
 	listaPeliculas = catalogue["peliculas"]
 	for pelicula in listaPeliculas:
-		if pelicula['id'] == id:
+		if pelicula['id'] == int(id_pelicula):
 			peli = pelicula
 			break
 	

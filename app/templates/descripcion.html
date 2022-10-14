@@ -4,8 +4,8 @@
 {% block carrito %}{% endblock%}
 
 {% block content%}
-<div class="informacionPelicula">
-	<img src={{ peli.poster }} alt={{ peli.titulo }}>
+<div class="informacion-pelicula">
+	<img src="{{ url_for('static', filename='img/' + peli.poster) }}" alt="{{ peli.titulo }}">
 	<div class="descripcionPelicula">
 		<p><b>Titulo: </b>{{ peli.titulo }}</p><br>
 		<p><b>Fecha: </b>{{ peli.año }}</p><br>
@@ -14,7 +14,7 @@
 	</div>
 	<div>
 		<form>
-			<input type="submit" name="Añadir al carrito", value="addToCart">
+			<input type="submit" name="Add to cart", value="Add to cart">
 		</form>
 	</div>
 </div>
