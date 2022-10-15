@@ -1,11 +1,44 @@
 {% extends 'base.html' %}
 
-{% block register %}{% endblock%}
-{% block carrito %}
+{% block title %}
+    {{ title }}
+{% endblock%}
+
+{% block content %}
+
+<script>
+    $(function() {
+      $('#test-carrito-button').bind('click', function() {
+        $.getJSON($SCRIPT_ROOT + '/_return_random_number', {}, function(data) {
+          $("#result").text(data.result);
+        });
+        return false;
+      });
+    });
+  </script>
+
+<div class='page-title'>
+    Carrito
+</div>
 
 <div>
-    asd
+    {% if not 'carrito' in session %}
+        <div class='comment'> Carrito vacio </div>
+    {% else %}
+        {% for (id, num) in session['carrito'].items() %}
+            <div>
+                {{ movies[id].titulo }}
+                numero de veces comprado: 
+                {{ num }}
+                
+        {% endfor %}
+    {% endif %}
 </div>
+
+<button type="button" id="test-carrito-button">Holi</button>
+<span id="result">
+    Nada
+</span>
 
 {% endblock%}
 

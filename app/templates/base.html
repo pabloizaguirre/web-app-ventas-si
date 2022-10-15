@@ -6,6 +6,10 @@
     <title>{% block title %} {% endblock %}- VideoClub</title>
     <!-- Uso de url_for para obtener la ruta de elementos de la página -->
     <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='estilo.css' ) }} />
+    <script src="{{ url_for('static', filename='jquery.js') }}"></script>
+    <script>
+        $SCRIPT_ROOT = {{ request.script_root|tojson }};
+      </script>
 </head>
 
 <body>
@@ -29,6 +33,7 @@
         {% else %}
         <a href="{{ url_for('logout') }}">Log out</a>
         {% endif%}
+        {{ session['carrito'] }}
     </div>
 
     <div class="content">
@@ -36,7 +41,7 @@
     </div>
 
     <div class="footer">
-        Pablo y Gian
+        <a href="https://github.com/pabloizaguirre">Pablo</a> y Gian
     </div>
 </body>
 

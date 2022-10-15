@@ -1,6 +1,6 @@
 {
-    "peliculas": [
-        {
+    "peliculas": {
+        "1": {
             "id": 1,
             "titulo": "La guerra de las galaxias: Episodio 1-La amenaza fantasma",
             "poster": "guerraepisodio1.jpg",
@@ -19,7 +19,7 @@
             "valoracion": 2,
             "criticas": "Desde un punto de vista cinematográfico, La amenaza fantasma es la peor de las seis películas de Star Wars, pero eso no quiere decir que sea mala, ni mucho menos, tan solo que está por debajo del nivel conseguido en la trilogía original y en el magnífico episodio que enlaza una con otra, La venganza de los Sith."
         },
-        {
+        "2": {
             "id": 2,
             "titulo": "Los vengadores",
             "poster": "avengers.jpeg",
@@ -53,7 +53,7 @@
             "valoracion": 4,
             "criticas": "En Los Vengadores no hay poesía, locura, ni mirada personal, pero Whedon ha armado el tebeo Marvel definitivo para multisalas, sirviéndose de una estructura impecable que dosifica —y equilibra— los clímax de acción y de unos diálogos pasados por la esmeriladora del ingenio y el guiño cómplice. La película alcanza su techo en un asombroso plano secuencia —o, más bien, su simulacro digital— que funciona como la más hiperbólica página desplegable de un comic-book imposible: una pirueta formal que saca pecho relacionando a los personajes principales en plena acción histérica. Quienes temían por la disneyización de la franquicia pueden descansar tranquilos: esto es Marvel puro —que, por cierto, nunca fue necesariamente adulto—. Lo mismo de siempre, mejor que nunca."
         },
-        {
+        "3": {
             "id": 3,
             "titulo": "Efecto mariposa",
             "poster": "efecto-mariposa.jpeg",
@@ -75,7 +75,7 @@
             "valoracion": 5,
             "criticas": "Si Supermán daba vueltas a la Tierra para ir hacia atrás en el tiempo, el guapo de Kutcher simplemente tiene que concentrarse mientras lee sus diarios. Pero una vez en el pasado no juega a la lotería, sino que ciertamente hace de supermán local: se preocupa de corregir los errores cometidos para mejorar su futuro y el de sus amigos. Lo cierto es que, además, si analizamos la película detenidamente, el asunto no era otro que el de tener los libritos a mano, pero Bress y Gruber, estos dos avispados directores novatos, nos lo envuelven en un thriller sofisticado y aparentemente complejo... que hay que reconocer que se hace bastante entretenido. Siempre que no le hagas tu propio efecto mariposa a la película y la revises (en su segunda visión pierde mucho, pues pierde su efecto sorpresa, su mayor baza). Un intrigante pasarratos, no recomendable para los niños, que gustó especialmente a los adolescentes (fue nº1 en la taquilla americana). Provoca división de opiniones, pero si no sabes qué coger en el videoclub, y te gusta el cine comercial, ésta puede ser una buena elección."
         },
-        {
+        "4": {
             "id": 4,
             "titulo": "Efecto mariposa",
             "poster": "efecto-mariposa.jpeg",
@@ -97,5 +97,5 @@
             "valoracion": 5,
             "criticas": "Si Supermán daba vueltas a la Tierra para ir hacia atrás en el tiempo, el guapo de Kutcher simplemente tiene que concentrarse mientras lee sus diarios. Pero una vez en el pasado no juega a la lotería, sino que ciertamente hace de supermán local: se preocupa de corregir los errores cometidos para mejorar su futuro y el de sus amigos. Lo cierto es que, además, si analizamos la película detenidamente, el asunto no era otro que el de tener los libritos a mano, pero Bress y Gruber, estos dos avispados directores novatos, nos lo envuelven en un thriller sofisticado y aparentemente complejo... que hay que reconocer que se hace bastante entretenido. Siempre que no le hagas tu propio efecto mariposa a la película y la revises (en su segunda visión pierde mucho, pues pierde su efecto sorpresa, su mayor baza). Un intrigante pasarratos, no recomendable para los niños, que gustó especialmente a los adolescentes (fue nº1 en la taquilla americana). Provoca división de opiniones, pero si no sabes qué coger en el videoclub, y te gusta el cine comercial, ésta puede ser una buena elección."
         }
-    ]
+    }
 }

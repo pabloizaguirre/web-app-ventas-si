@@ -2,12 +2,14 @@
 # -*- coding: utf-8 -*-
 
 from app import app
-from flask import render_template, request, url_for, redirect, session
+from flask import render_template, request, url_for, redirect, session, jsonify
 from app.busquedapelicula import filtrar
 from app.usuario import crearUsuario, comprobacionUsuario
 import json
 import os
 import sys
+from collections import Counter
+import random
 
 catalogue_data = open(os.path.join(app.root_path,'inventario/inventario.json'), encoding="utf-8").read()
 catalogue = json.loads(catalogue_data)
@@ -44,8 +46,9 @@ def login():
 
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
-    session.pop('usuario', None)
-    return redirect(url_for('index'))
+	session.pop('usuario', None)
+	session.pop('carrito', None)
+	return redirect(url_for('index'))
 
 @app.route('/registro', methods=['GET', 'POST'])
 def registro():
@@ -66,24 +69,29 @@ def indexregistrado():
 
 @app.route('/carrito', methods=['GET', 'POST'])
 def carrito():
-	return render_template('carrito.html')
+	return render_template('carrito.html', movies=catalogue['peliculas'])
 
 @app.route('/descripcion/<id_pelicula>', methods=['GET', 'POST'])
 def descripcion(id_pelicula):
+
 	if 'Add to cart' in request.args:
 		if 'carrito' in session:
-			print('a')
-			session['carrito'].append(['buenas', 'que tal'])
+			session['carrito'][id_pelicula] += 1
+			session.modified=True
 		else:
-			session['carrito'] = ['hey']
-			print(session['carrito'])
-			print('b')
+			session['carrito'] = Counter([id_pelicula])
+			session.modified=True
 
+		return redirect(url_for('descripcion', id_pelicula=id_pelicula))
+	
 	listaPeliculas = catalogue["peliculas"]
-	for pelicula in listaPeliculas:
-		if pelicula['id'] == int(id_pelicula):
-			peli = pelicula
-			break
+	print(listaPeliculas)
+	if not id_pelicula in listaPeliculas:
+		return redirect(url_for("index"))
 	
-	return render_template('descripcion.html', peli = peli)
 	
+	return render_template('descripcion.html', peli = listaPeliculas[id_pelicula])
+	
+@app.route('/_return_random_number', methods=['GET', 'POST'])
+def return_random_number():
+	return jsonify(result=random.randint(1,10))
