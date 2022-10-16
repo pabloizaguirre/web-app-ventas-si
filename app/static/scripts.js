@@ -51,3 +51,13 @@ function updateUserCount() {
 $(function () {
     updateUserCount();
 });
+
+/* $(function () {
+    $('input.star').bind('click', function () {
+        $.getJSON($SCRIPT_ROOT + '/_introducir_valoracion', {
+            valoracion: $(this).attr('id').split("-").slice(-1)[0]
+        }, function (data) {
+        });
+        return false;
+    });
+}); */

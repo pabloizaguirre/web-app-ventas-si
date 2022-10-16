@@ -85,7 +85,6 @@ def descripcion(id_pelicula):
 		return redirect(url_for('descripcion', id_pelicula=id_pelicula))
 	
 	listaPeliculas = catalogue["peliculas"]
-	print(listaPeliculas)
 	if not id_pelicula in listaPeliculas:
 		return redirect(url_for("index"))
 	
@@ -127,3 +126,8 @@ def remove_from_cart():
 def vaciar_carrito():
 	session.pop('carrito', None)
 	return
+
+""" @app.route('/_introducir_valoracion', methods=['GET', 'POST'])
+def introducir_valoracion():
+	
+	return """
