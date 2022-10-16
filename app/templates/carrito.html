@@ -6,17 +6,6 @@
 
 {% block content %}
 
-<script>
-    $(function() {
-      $('#test-carrito-button').bind('click', function() {
-        $.getJSON($SCRIPT_ROOT + '/_return_random_number', {}, function(data) {
-          $("#result").text(data.result);
-        });
-        return false;
-      });
-    });
-  </script>
-
 <div class='page-title'>
     Carrito
 </div>
@@ -26,19 +15,23 @@
         <div class='comment'> Carrito vacio </div>
     {% else %}
         {% for (id, num) in session['carrito'].items() %}
-            <div>
+            <div class="cart-element">
+                <a href="{{ url_for('descripcion', id_pelicula = id) }}">
                 {{ movies[id].titulo }}
-                numero de veces comprado: 
-                {{ num }}
+            </a>
+                Unidades: 
+                <span class="cart-count" id="cart-count-{{ id }}">{{ num }} </span>
+                
+                <button type="button" class="add-to-cart-plus small-button" id="add-to-cart-plus-{{ id }}">+</button>
+                <button type="button" class="remove-from-cart small-button" id="remove-from-cart-{{ id }}">-</button>
+
+            </div>
                 
         {% endfor %}
     {% endif %}
 </div>
-
-<button type="button" id="test-carrito-button">Holi</button>
-<span id="result">
-    Nada
-</span>
-
+{% if 'carrito' in session %}
+    <button type="button" id="vaciar-carrito">Vaciar</button>
+    {% endif %}
 {% endblock%}
 

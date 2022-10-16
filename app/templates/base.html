@@ -8,8 +8,10 @@
     <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='estilo.css' ) }} />
     <script src="{{ url_for('static', filename='jquery.js') }}"></script>
     <script>
-        $SCRIPT_ROOT = {{ request.script_root|tojson }};
-      </script>
+        $SCRIPT_ROOT = {{ request.script_root | tojson }};
+    </script>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+
 </head>
 
 <body>
@@ -20,18 +22,21 @@
         {% else %}
         <span>Usuario:{{ session['usuario'] }}</span>
         {% endif%}
+        <span id="user-count"></span>
     </div>
 
     <div class="side-bar">
-        <a href="{{ url_for('index') }}">Home</a>
-        <a href="{{ url_for('carrito') }}">carrito</a>
+        <a href="{{ url_for('index') }}">
+            <button class="side">Home</button>
+        </a>
+        <a href="{{ url_for('carrito') }}"><button class="side">Carrito</button></a>
 
         {% if not session['usuario'] %}
-        <a href="{{ url_for('login') }}">Sign In</a>
-        <a href="{{ url_for('registro') }}">Registro</a>
+        <a href="{{ url_for('login') }}"><button class="side">Iniciar Sesión</button></a>
+        <a href="{{ url_for('registro') }}"><button class="side">Registro</button></a>
 
         {% else %}
-        <a href="{{ url_for('logout') }}">Log out</a>
+        <a href="{{ url_for('logout') }}"><button class="side">Cerrar Sesión</button></a>
         {% endif%}
         {{ session['carrito'] }}
     </div>

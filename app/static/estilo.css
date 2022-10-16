@@ -9,7 +9,7 @@ body {
 	position: fixed;
 	top: 0;
 	padding: 10px;
-	background-color: #c9c8d4;
+	background-color: #dde8f3;
 	width: 100%;
 	z-index:1;
 }
@@ -17,13 +17,18 @@ body {
 .side-bar {
 	position: fixed;
 	left: 0;
-	top: 40px;
-	width: 8%;
+	top: 50px;
+	width: 14%;
 	height: 95%;
 	display: flex;
 	padding: 1%;
 	flex-direction: column;
-	background-color: #cedbe4;
+	
+}
+
+button.side {
+	width: 100%;
+	margin-bottom: 10px;
 }
 
 .footer {
@@ -42,7 +47,7 @@ body {
 	bottom: 40px;
 	margin-bottom: 40px;
 	margin-top: 50px;
-	width: 90%;
+	width: 84%;
 	z-index:-1;
 	
 }
@@ -74,7 +79,7 @@ body {
 	border-radius: 10px;
 	padding: 10px;
 	width: 20em;
-	background-color: rgba(255, 255, 255, 0.7);
+	background-color: rgba(255, 255, 255, 0.6);
 	box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 	backdrop-filter: blur(5px);
 }
@@ -83,14 +88,14 @@ body {
 button {
   background-color: rgb(218,229,246);
   border: 2px solid #422800;
-  border-radius: 20px;
+  border-radius: 15px;
   box-shadow: #422800 4px 4px 0 0;
   color: #422800;
   cursor: pointer;
   display: inline-block;
   font-size: large;
   padding: 0 18px;
-  line-height: 50px;
+  line-height: 35px;
   text-align: center;
   text-decoration: none;
   user-select: none;
@@ -109,7 +114,7 @@ button:active {
 
 @media (min-width: 768px) {
   button {
-    min-width: 120px;
+    min-width: 100px;
     padding: 0 25px;
   }
 }
@@ -130,6 +135,14 @@ button:active {
 	margin-bottom: 1rem;
 	box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 }
+
+.movie-container:hover {
+	box-shadow: 0 3px 20px rgb(0 0 0 / 0.3);
+  }
+
+.movie-container:active {
+	transform: translate(2px, 2px);
+  }
 
 .movie-container img {
 	width: auto;
@@ -166,4 +179,26 @@ button:active {
 
 .informacion-pelicula img {
 	height: 300px;
+}
+
+.small-button {
+	min-width: 25px;
+	line-height: 20px;
+	padding: 0;
+	border-radius: 10px;
+}
+
+.remove-from-cart {
+	background-color: rgb(255, 211, 211);
+}
+
+.cart-element {
+	margin-bottom: 1em;
+}
+
+button#vaciar-carrito {
+	background-color: rgb(255, 211, 211);
+	font-size: small;
+	line-height: 30px;
+	min-width: 50px;
 }

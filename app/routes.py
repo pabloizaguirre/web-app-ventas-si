@@ -94,4 +94,36 @@ def descripcion(id_pelicula):
 	
 @app.route('/_return_random_number', methods=['GET', 'POST'])
 def return_random_number():
-	return jsonify(result=random.randint(1,10))
+	return jsonify(result=random.randint(1000,2000))
+
+@app.route('/_add_to_cart', methods=['GET', 'POST'])
+def add_to_cart():
+	id_pelicula = request.args.get('film_id', type=str)
+
+	if 'carrito' in session:
+		session['carrito'][id_pelicula] += 1
+		session.modified=True
+	else:
+		session['carrito'] = Counter([id_pelicula])
+		session.modified=True
+	return
+
+@app.route('/_remove_from_cart', methods=['GET', 'POST'])
+def remove_from_cart():
+	id_pelicula = request.args.get('film_id', type=str)
+
+	if 'carrito' in session:
+		if session['carrito'][id_pelicula] > 0:
+			session['carrito'][id_pelicula] -= 1
+			session.modified=True
+		else:
+			del session['carrito'][id_pelicula]
+	else:
+		session['carrito'] = Counter([id_pelicula])
+		session.modified=True
+	return
+
+@app.route('/_vaciar_carrito', methods=['GET', 'POST'])
+def vaciar_carrito():
+	session.pop('carrito', None)
+	return
