@@ -47,6 +47,7 @@ def login():
 def logout():
 	session.pop('usuario', None)
 	session.pop('carrito', None)
+	session.pop('valoraciones', None)
 	return redirect(url_for('index'))
 
 @app.route('/registro', methods=['GET', 'POST'])
@@ -69,6 +70,9 @@ def carrito():
 
 @app.route('/descripcion/<id_pelicula>', methods=['GET', 'POST'])
 def descripcion(id_pelicula):
+
+	if request.method == 'POST':
+		print(request.form['options'])
 
 	if 'Add to cart' in request.args:
 		if 'carrito' in session:
@@ -125,7 +129,26 @@ def vaciar_carrito():
 	session.pop('carrito', None)
 	return
 
-""" @app.route('/_introducir_valoracion', methods=['GET', 'POST'])
+@app.route('/_introducir_valoracion', methods=['GET', 'POST'])
 def introducir_valoracion():
-	
-	return """
+	valoracion = request.args.get('valoracion', type=int)
+	id = request.args.get('film_id', type=str)
+
+	if('valoraciones' not in session):
+		session['valoraciones'] = [id]
+	elif(id in session['valoraciones']):
+		return jsonify(valorada=1)
+	else:
+		session['valoraciones'].append(id)
+
+	valoracion_antigua = catalogue['peliculas'][id]['valoracion']
+	num_val = catalogue['peliculas'][id]['numeroValoraciones']
+	nueva_valoracion = (valoracion_antigua*num_val + valoracion)/(num_val + 1)
+
+	catalogue['peliculas'][id]['valoracion'] = nueva_valoracion
+	catalogue['peliculas'][id]['numeroValoraciones'] = num_val + 1
+
+	with open(os.path.join(app.root_path,'inventario/inventario.json'), 'w', encoding="utf-8") as catalogueFile:
+		json.dump(catalogue, catalogueFile, indent=4)
+
+	return jsonify(valorada=0)

@@ -234,6 +234,7 @@ button#vaciar-carrito {
 	min-width: 50px;
 }
 
+/* Estrellas */
 
 div.stars {
 	width: 300px;
@@ -250,14 +251,32 @@ div.stars {
   }
   input.star:checked ~ label.star:before {
 	content: '\2605';
-	color: #FD4;
+	color: #FE7;
 	transition: all .25s;
   }
   input.star-5:checked ~ label.star:before {
 	color: #FE7;
-	text-shadow: 0 0 20px #952;
+	text-shadow: 0 0 20px rgb(93, 84, 52);
   }
   label.star:hover { transform: rotate(-15deg) scale(1.3); }
   label.star:before {
 	content: '\2606';
+  }
+
+  svg {
+	margin-bottom: 2em;
+	width: 10%;
+  }
+  
+  .rating__background {
+	fill: #FFE372;
+	stroke: red;
+	stroke-width: 1;
+	height: 100%;
+	width: 100%;
+  }
+  
+  .rating__value {
+	fill: #FFB94B;
+	height: 100%;
   }

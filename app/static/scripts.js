@@ -77,15 +77,28 @@ $(function () {
     updateUserCount();
 });
 
-/* $(function () {
-    $('input.star').bind('click', function () {
+/* Enviar valoracion estrellas */
+
+$(function () {
+    $('input.star').on('change', function () {
+        valoracion = $(this).attr('id').split("-").slice(-1)[0]
         $.getJSON($SCRIPT_ROOT + '/_introducir_valoracion', {
-            valoracion: $(this).attr('id').split("-").slice(-1)[0]
+            valoracion: valoracion,
+            film_id: window.location.pathname.split('/').slice(-1)[0]
         }, function (data) {
+            if(data.valorada) {
+                displayMessage('Ya has valorado esta pelicula', error=true);
+                return false;
+            }
         });
+        message = 'Introducida valoracion de ' + valoracion + ' estrella'
+        if(valoracion > '1'){
+            message += 's'
+        }
+        displayMessage(message)
         return false;
     });
-}); */
+});
 
 
 /* Comprobar clave */

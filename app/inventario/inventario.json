@@ -7,7 +7,7 @@
             "director": "George Lucas",
             "precio": 18.99,
             "categoria": "Aventura",
-            "año": 1999,
+            "a\u00f1o": 1999,
             "actores": [
                 {
                     "nombre": "Jake Lloyd",
@@ -15,9 +15,10 @@
                     "foto": "imagenes/anakin.jpg"
                 }
             ],
-            "sinopsis": "La República Galáctica está sumida en el caos. Los impuestos de las rutas comerciales a los sistemas estelares exteriores están en disputa. Esperando resolver el asunto con un bloqueo de poderosas naves de guerra, la codiciosa Federación del Comercio ha detenido todos los envíos al pequeño planeta de Naboo.",
-            "valoracion": 2,
-            "criticas": "Desde un punto de vista cinematográfico, La amenaza fantasma es la peor de las seis películas de Star Wars, pero eso no quiere decir que sea mala, ni mucho menos, tan solo que está por debajo del nivel conseguido en la trilogía original y en el magnífico episodio que enlaza una con otra, La venganza de los Sith."
+            "sinopsis": "La Rep\u00fablica Gal\u00e1ctica est\u00e1 sumida en el caos. Los impuestos de las rutas comerciales a los sistemas estelares exteriores est\u00e1n en disputa. Esperando resolver el asunto con un bloqueo de poderosas naves de guerra, la codiciosa Federaci\u00f3n del Comercio ha detenido todos los env\u00edos al peque\u00f1o planeta de Naboo.",
+            "valoracion": 3.0,
+            "numeroValoraciones": 3,
+            "criticas": "Desde un punto de vista cinematogr\u00e1fico, La amenaza fantasma es la peor de las seis pel\u00edculas de Star Wars, pero eso no quiere decir que sea mala, ni mucho menos, tan solo que est\u00e1 por debajo del nivel conseguido en la trilog\u00eda original y en el magn\u00edfico episodio que enlaza una con otra, La venganza de los Sith."
         },
         "2": {
             "id": 2,
@@ -26,7 +27,7 @@
             "director": "Joss Whedon",
             "precio": 13.4,
             "categoria": "Accion",
-            "año": 2012,
+            "a\u00f1o": 2012,
             "actores": [
                 {
                     "nombre": "Scarlett Johansson",
@@ -49,9 +50,10 @@
                     "personaje": "Hulk"
                 }
             ],
-            "sinopsis": "Cuando un enemigo inesperado surge como una gran amenaza para la seguridad mundial, Nick Fury, director de la Agencia SHIELD, decide reclutar a un equipo para salvar al mundo de un desastre casi seguro. Adaptación del cómic de Marvel Los Vengadores, el legendario grupo de superhéroes formado por Ironman, Hulk, Thor y el Capitán América entre otros.",
-            "valoracion": 4,
-            "criticas": "En Los Vengadores no hay poesía, locura, ni mirada personal, pero Whedon ha armado el tebeo Marvel definitivo para multisalas, sirviéndose de una estructura impecable que dosifica —y equilibra— los clímax de acción y de unos diálogos pasados por la esmeriladora del ingenio y el guiño cómplice. La película alcanza su techo en un asombroso plano secuencia —o, más bien, su simulacro digital— que funciona como la más hiperbólica página desplegable de un comic-book imposible: una pirueta formal que saca pecho relacionando a los personajes principales en plena acción histérica. Quienes temían por la disneyización de la franquicia pueden descansar tranquilos: esto es Marvel puro —que, por cierto, nunca fue necesariamente adulto—. Lo mismo de siempre, mejor que nunca."
+            "sinopsis": "Cuando un enemigo inesperado surge como una gran amenaza para la seguridad mundial, Nick Fury, director de la Agencia SHIELD, decide reclutar a un equipo para salvar al mundo de un desastre casi seguro. Adaptaci\u00f3n del c\u00f3mic de Marvel Los Vengadores, el legendario grupo de superh\u00e9roes formado por Ironman, Hulk, Thor y el Capit\u00e1n Am\u00e9rica entre otros.",
+            "valoracion": 3.25,
+            "numeroValoraciones": 4,
+            "criticas": "En Los Vengadores no hay poes\u00eda, locura, ni mirada personal, pero Whedon ha armado el tebeo Marvel definitivo para multisalas, sirvi\u00e9ndose de una estructura impecable que dosifica \u2014y equilibra\u2014 los cl\u00edmax de acci\u00f3n y de unos di\u00e1logos pasados por la esmeriladora del ingenio y el gui\u00f1o c\u00f3mplice. La pel\u00edcula alcanza su techo en un asombroso plano secuencia \u2014o, m\u00e1s bien, su simulacro digital\u2014 que funciona como la m\u00e1s hiperb\u00f3lica p\u00e1gina desplegable de un comic-book imposible: una pirueta formal que saca pecho relacionando a los personajes principales en plena acci\u00f3n hist\u00e9rica. Quienes tem\u00edan por la disneyizaci\u00f3n de la franquicia pueden descansar tranquilos: esto es Marvel puro \u2014que, por cierto, nunca fue necesariamente adulto\u2014. Lo mismo de siempre, mejor que nunca."
         },
         "3": {
             "id": 3,
@@ -60,7 +62,7 @@
             "director": "Eric Bress",
             "precio": 15,
             "categoria": "Drama",
-            "año": 2004,
+            "a\u00f1o": 2004,
             "actores": [
                 {
                     "nombre": "Ashton Kutcher",
@@ -71,9 +73,10 @@
                     "personaje": "Kayleigh Miller"
                 }
             ],
-            "sinopsis": "Evan Treborn, un joven que se está esforzando por superar unos dolorosos recuerdos de su infancia, descubre una técnica que le permite viajar atrás en el tiempo y ocupar su cuerpo de niño para poder cambiar el curso de su dolorosa historia. Sin embargo también descubre que cualquier mínimo cambio en el pasado altera enormemente su futuro.",
+            "sinopsis": "Evan Treborn, un joven que se est\u00e1 esforzando por superar unos dolorosos recuerdos de su infancia, descubre una t\u00e9cnica que le permite viajar atr\u00e1s en el tiempo y ocupar su cuerpo de ni\u00f1o para poder cambiar el curso de su dolorosa historia. Sin embargo tambi\u00e9n descubre que cualquier m\u00ednimo cambio en el pasado altera enormemente su futuro.",
             "valoracion": 5,
-            "criticas": "Si Supermán daba vueltas a la Tierra para ir hacia atrás en el tiempo, el guapo de Kutcher simplemente tiene que concentrarse mientras lee sus diarios. Pero una vez en el pasado no juega a la lotería, sino que ciertamente hace de supermán local: se preocupa de corregir los errores cometidos para mejorar su futuro y el de sus amigos. Lo cierto es que, además, si analizamos la película detenidamente, el asunto no era otro que el de tener los libritos a mano, pero Bress y Gruber, estos dos avispados directores novatos, nos lo envuelven en un thriller sofisticado y aparentemente complejo... que hay que reconocer que se hace bastante entretenido. Siempre que no le hagas tu propio efecto mariposa a la película y la revises (en su segunda visión pierde mucho, pues pierde su efecto sorpresa, su mayor baza). Un intrigante pasarratos, no recomendable para los niños, que gustó especialmente a los adolescentes (fue nº1 en la taquilla americana). Provoca división de opiniones, pero si no sabes qué coger en el videoclub, y te gusta el cine comercial, ésta puede ser una buena elección."
+            "numeroValoraciones": 2,
+            "criticas": "Si Superm\u00e1n daba vueltas a la Tierra para ir hacia atr\u00e1s en el tiempo, el guapo de Kutcher simplemente tiene que concentrarse mientras lee sus diarios. Pero una vez en el pasado no juega a la loter\u00eda, sino que ciertamente hace de superm\u00e1n local: se preocupa de corregir los errores cometidos para mejorar su futuro y el de sus amigos. Lo cierto es que, adem\u00e1s, si analizamos la pel\u00edcula detenidamente, el asunto no era otro que el de tener los libritos a mano, pero Bress y Gruber, estos dos avispados directores novatos, nos lo envuelven en un thriller sofisticado y aparentemente complejo... que hay que reconocer que se hace bastante entretenido. Siempre que no le hagas tu propio efecto mariposa a la pel\u00edcula y la revises (en su segunda visi\u00f3n pierde mucho, pues pierde su efecto sorpresa, su mayor baza). Un intrigante pasarratos, no recomendable para los ni\u00f1os, que gust\u00f3 especialmente a los adolescentes (fue n\u00ba1 en la taquilla americana). Provoca divisi\u00f3n de opiniones, pero si no sabes qu\u00e9 coger en el videoclub, y te gusta el cine comercial, \u00e9sta puede ser una buena elecci\u00f3n."
         },
         "4": {
             "id": 4,
@@ -82,7 +85,7 @@
             "director": "Eric Bress",
             "precio": 15,
             "categoria": "Drama",
-            "año": 2004,
+            "a\u00f1o": 2004,
             "actores": [
                 {
                     "nombre": "Ashton Kutcher",
@@ -93,9 +96,10 @@
                     "personaje": "Kayleigh Miller"
                 }
             ],
-            "sinopsis": "Evan Treborn, un joven que se está esforzando por superar unos dolorosos recuerdos de su infancia, descubre una técnica que le permite viajar atrás en el tiempo y ocupar su cuerpo de niño para poder cambiar el curso de su dolorosa historia. Sin embargo también descubre que cualquier mínimo cambio en el pasado altera enormemente su futuro.",
-            "valoracion": 5,
-            "criticas": "Si Supermán daba vueltas a la Tierra para ir hacia atrás en el tiempo, el guapo de Kutcher simplemente tiene que concentrarse mientras lee sus diarios. Pero una vez en el pasado no juega a la lotería, sino que ciertamente hace de supermán local: se preocupa de corregir los errores cometidos para mejorar su futuro y el de sus amigos. Lo cierto es que, además, si analizamos la película detenidamente, el asunto no era otro que el de tener los libritos a mano, pero Bress y Gruber, estos dos avispados directores novatos, nos lo envuelven en un thriller sofisticado y aparentemente complejo... que hay que reconocer que se hace bastante entretenido. Siempre que no le hagas tu propio efecto mariposa a la película y la revises (en su segunda visión pierde mucho, pues pierde su efecto sorpresa, su mayor baza). Un intrigante pasarratos, no recomendable para los niños, que gustó especialmente a los adolescentes (fue nº1 en la taquilla americana). Provoca división de opiniones, pero si no sabes qué coger en el videoclub, y te gusta el cine comercial, ésta puede ser una buena elección."
+            "sinopsis": "Evan Treborn, un joven que se est\u00e1 esforzando por superar unos dolorosos recuerdos de su infancia, descubre una t\u00e9cnica que le permite viajar atr\u00e1s en el tiempo y ocupar su cuerpo de ni\u00f1o para poder cambiar el curso de su dolorosa historia. Sin embargo tambi\u00e9n descubre que cualquier m\u00ednimo cambio en el pasado altera enormemente su futuro.",
+            "valoracion": 4.2,
+            "numeroValoraciones": 5,
+            "criticas": "Si Superm\u00e1n daba vueltas a la Tierra para ir hacia atr\u00e1s en el tiempo, el guapo de Kutcher simplemente tiene que concentrarse mientras lee sus diarios. Pero una vez en el pasado no juega a la loter\u00eda, sino que ciertamente hace de superm\u00e1n local: se preocupa de corregir los errores cometidos para mejorar su futuro y el de sus amigos. Lo cierto es que, adem\u00e1s, si analizamos la pel\u00edcula detenidamente, el asunto no era otro que el de tener los libritos a mano, pero Bress y Gruber, estos dos avispados directores novatos, nos lo envuelven en un thriller sofisticado y aparentemente complejo... que hay que reconocer que se hace bastante entretenido. Siempre que no le hagas tu propio efecto mariposa a la pel\u00edcula y la revises (en su segunda visi\u00f3n pierde mucho, pues pierde su efecto sorpresa, su mayor baza). Un intrigante pasarratos, no recomendable para los ni\u00f1os, que gust\u00f3 especialmente a los adolescentes (fue n\u00ba1 en la taquilla americana). Provoca divisi\u00f3n de opiniones, pero si no sabes qu\u00e9 coger en el videoclub, y te gusta el cine comercial, \u00e9sta puede ser una buena elecci\u00f3n."
         }
     }
 }
