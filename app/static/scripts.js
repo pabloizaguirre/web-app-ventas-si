@@ -9,6 +9,9 @@ $(function () {
             const num = $('#cart-count-' + film_id).text()
             $('#cart-count-' + film_id).text(parseInt(num) + 1)
         }
+        else {
+            displayMessage('Añadido al carrito')
+        }
         return false;
     });
 });
@@ -33,11 +36,27 @@ $(function () {
             {},
             function (data) {});
         location.reload();
-        return true;
+        return false;
     });
+    
 });
 
-
+function displayMessage(message) {
+    $('#message-container').show()
+    $('#message').text(message)
+    
+    $('#message-container').animate({
+        top: '50px'
+    })
+    setTimeout(function() {
+        $('#message-container').animate({
+            top: '-10px'
+        })
+        setTimeout(function() {
+            $('#message-container').hide()
+        }, 1000);
+    }, 3000);
+}
 
 function updateUserCount() {
 
