@@ -9,7 +9,16 @@
 <div id="busqueda-index-container">
     <form name="busqueda-drop" method="POST" id="busqueda-index">
         <input type="text" name="texto_busqueda" class="search" placeholder="Search..">
-        <input type="submit" name="submit" class="submit" value="Search" />
+        <input type="submit" name="submit" class="submit" value="Buscar" />
+    </form>
+
+    <form name="filtrado" method="POST" id="filtrado-index">
+        <select name="categorias" id="categorias-filtrado">
+            {% for categoria in categorias %}
+                <option value="{{ categoria }}">{{ categoria }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Filtrar" />
     </form>
 </div>
 

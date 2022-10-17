@@ -68,22 +68,20 @@ button.side {
 	position: sticky;
 	top: 50px;
 	z-index:0;
-	display: flex;
-	justify-content: center;
-	align-items: center;	
-	
-}
-
-#busqueda-index {
+	left: 40%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	border-radius: 10px;
 	padding: 10px;
-	width: 20em;
+	width: 25em;
 	background-color: rgba(255, 255, 255, 0.6);
 	box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 	backdrop-filter: blur(5px);
+}
+
+#busqueda-index{
+	margin-right: 1em;
 }
 
 /* Mensaje */

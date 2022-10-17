@@ -17,11 +17,14 @@ catalogue = json.loads(catalogue_data)
 @app.route('/', methods = ['GET', 'POST'])
 @app.route('/index', methods = ['GET', 'POST'])
 def index():
+	# Creamos la lista con las categorias de peliculas
+	categorias = list(set(map(lambda x: x['categoria'], catalogue['peliculas'].values())))
+	print(categorias)
 	if request.method == 'POST':
 		filtracion = filtrar(catalogue, request)
-		return render_template('index.html', movies = filtracion)
+		return render_template('index.html', title = "Home", movies = filtracion, categorias=categorias)
 	else:
-		return render_template('index.html', title = "Home", movies=catalogue['peliculas'])
+		return render_template('index.html', title = "Home", movies=catalogue['peliculas'], categorias=categorias)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -87,7 +90,6 @@ def descripcion(id_pelicula):
 	listaPeliculas = catalogue["peliculas"]
 	if not id_pelicula in listaPeliculas:
 		return redirect(url_for("index"))
-	
 	
 	return render_template('descripcion.html', peli = listaPeliculas[id_pelicula])
 	
