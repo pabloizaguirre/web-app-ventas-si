@@ -1,109 +1,46 @@
-<!DOCTYPE HTML>
-<html lang = "es">
-	<head>
-        	<title>Spotifylm</title>
-        	<meta charset="utf-8">
-        	<link rel="stylesheet" type="text/css" href="styles.css">
-        	<link rel="shortcut icon" href="imagenes/favicon.ico" type="image/x-icon">   
-		<script>	
-			function muestra_seguridad_clave(clave,formulario){
-  				 seguridad=seguridad_clave(clave);
-   				formulario.seguridad.value=seguridad;
-			} 
-		</script>
+{% extends 'base.html' %}
 
-		<script>	
-			function comprobarClave(){
-   				 clave1 = document.forms["formu"]["clave"].value;
-    				 clave2 = document.forms["formu"]["clave-confirmar"].value;
+{% block title %}
+    {{ title }}
+{% endblock%}
 
-    				 if (clave1 != clave2) {
-      				 	alert("Las dos claves son distintas");
-					return false;
-				}
-			} 
-		</script>
+{% block content %}
 
-		<script>
-			function seguridad_clave(clave){
-   				seguridad = 0;
-   				if (clave.length!=0){
-					if (clave.length >= 4 && clave.length <= 5) {
-						seguridad += 10;
-					}  else if (clave.length >= 6 && clave.length <= 8) {
-						seguridad += 30;		
-					} else if (clave.length > 8) {
-						seguridad += 40;
-					}
-				}
+{% if mensaje_error %}
+    <script>
+        displayMessage("{{ mensaje_error }}", error=true);
+    </script>
+{% endif %}
 
-				numeros = "0123456789";
+<form action="" method="POST" name ="formu" onsubmit = "return comprobarClave()">
+    <p>
+        Usuario:
+        <input name="usuario" type="text" MINLENGTH="5">
+    </p>
+    <p>
+        Email:
+        <input name="correo" type="email">
+    </p>
+    <p>
+        Clave:
+        <input name="clave" type="password" MINLENGTH="6" onkeyup="muestra_seguridad_clave(this.value, this.form)">
+        <i>seguridad:</i> <input name="seguridad" type="text" style="border: 0px;" onfocus="blur()">
+    </p>
+    <p>
+        Confirmación:
+        <input name="clave-confirmar" type="password"  MINLENGTH="6">
+    </p>
+    <p>
+        Tarjeta de crédito:
+        <input name="tarjeta" type="text" MINLENGTH="16" MAXLENGTH="16">
+    </p>
+    <p>
+        Dirección:
+        <input name="direccion" type="text" MAXLENGTH="50">
+    </p>
+    <p>
+        <input type = "submit" value = "Registrar" class="button-style green-button">
+    </p>
+</form>	
 
-				for (i = 0; i<clave.length; i++) {
-					letra = clave.charAt(i);
-					if(numeros.indexOf(letra,0)!=-1) {
-						seguridad += 20;
-					}
-					if (letra === letra.toUpperCase()) {
-						seguridad += 20;
-					}
-					if (letra === letra.toLowerCase()) {
-						seguridad += 10;
-					}
-				}
-
-				especiales = "@#$%&/()="
-
-				for (i = 0; i<clave.length; i++) {
-					letra = clave.charAt(i);
-					if(especiales.indexOf(letra,0)!=-1) {
-						seguridad += 10;
-					}
-				}
-
-				if (seguridad <= 100) {
-					retorno = "debil";
-				} else if (seguridad > 100 && seguridad <=240) {
-					retorno = "normal";
-				} else {
-					retorno = "fuerte";
-				}
-
- 				return retorno; 
-         		}			           
-		 </script>
-    	</head>
-
-	<body>
-		<form action="formularioRegistro" method="POST" name ="formu" onsubmit = "return comprobarClave()">
-			<p>
-				Usuario:
-				<input name="usuario" type="text" MINLENGTH="4">
-			</p>
-			<p>
-				Email:
-				<input name="correo" type="email">
-			</p>
-			<p>
-				Clave:
-				<input name="clave" type="password" MINLENGTH="6" onkeyup="muestra_seguridad_clave(this.value, this.form)">
-				<i>seguridad:</i> <input name="seguridad" type="text" style="border: 0px;" onfocus="blur()">
-			</p>
-			<p>
-				Confirmación:
-				<input name="clave-confirmar" type="password"  MINLENGTH="6">
-			</p>
-			<p>
-				Tarjeta de crédito:
-				<input name="tarjeta" type="text" MINLENGTH="16" MAXLENGTH="16">
-			</p>
-			<p>
-				Dirección:
-				<input name="direccion" type="text" MAXLENGTH="50">
-			</p>
-			<p>
-				<input type = "submit" value = "Registrar">
-			</p>
-		</form>	
-	</body>
-</html>
+{% endblock%}

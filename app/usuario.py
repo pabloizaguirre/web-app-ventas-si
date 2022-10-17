@@ -3,14 +3,16 @@
 
 import os, hashlib, random
 
-def crearUsuario(nombreUsuario, clave, email, tarjeta):
-	if len(nombreUsuario) == 0 or len(email) == 0 or len(clave) == 0 or len(tarjeta) == 0:
+def crearUsuario(form):
+
+	if len(form['usuario']) == 0 or len(form['correo']) == 0 or len(form['clave']) == 0 or len(form['tarjeta']) == 0:
 		raise Exception("Faltan campos")
 
-	dirUsuario = 'si1users/' + nombreUsuario
+	appDir = os.path.dirname(os.path.abspath(__file__))
+	dirUsuario = os.path.join(appDir, '../si1users/' + form['usuario'])
 
 	if os.path.exists(dirUsuario):
-		raise Exception("usuario ya existente")
+		raise Exception("Usuario ya existente")
 	else:
 		os.mkdir(dirUsuario)
 
@@ -20,14 +22,14 @@ def crearUsuario(nombreUsuario, clave, email, tarjeta):
 	file = open(dir, 'w')
 
 	encriptado = hashlib.sha3_384()
-	encriptado.update(clave.encode('utf-8'))
-	encriptado.hexdigest()
+	encriptado.update(form['clave'].encode('utf-8'))
+	encriptado = encriptado.hexdigest()
 
-	file.write(nombreUsuario + '\n')
+	file.write(form['usuario'] + '\n')
 	file.write(encriptado + '\n')
-	file.write(email + '\n')
-	file.write(tarjeta + '\n')
-	file.write(str(random.randint(0,500)))
+	file.write(form['correo'] + '\n')
+	file.write(form['tarjeta'] + '\n')
+	file.write(str(random.randint(0,50)))
 	file.close()
 	file = open(dirCompras, 'w')
 	file.close()
@@ -42,12 +44,12 @@ def comprobacionUsuario(nombreUsuario, clave):
 		raise Exception("Nombre de usuario incorrecto")
 
 	file = open(directorioU, 'r')
-	nUsuario = file.readline()
-	passw = file.readline()
+	nUsuario = file.readline()[:-1]
+	passw = file.readline()[:-1]
 
 	encriptado = hashlib.sha3_384()
 	encriptado.update(clave.encode('utf-8'))
-	encriptado.hexdigest()
+	encriptado = encriptado.hexdigest()
 
 	if nUsuario != nombreUsuario:
 		file.close()

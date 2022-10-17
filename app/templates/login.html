@@ -9,12 +9,21 @@
 {% endblock%}
 
 {% block content %}
+
+    {% if mensaje_error %}
+        <script>
+            displayMessage("{{ mensaje_error }}", error=true);
+        </script>
+    {% endif %}
+
     <h1>Sign In</h1>
-    <form action="" method="post" novalidate>
+    <form action="" method="post">
         <label><b>Username</b></label>
-        <input name="username" type="text" placeholder="Enter username">
+        <input name="username" type="text" placeholder="Enter username" required>
         <label><b>Password</b></label>
-        <input name="password" type="password" placeholder="Enter password">
-        <input type="submit" value="Login">
+        <input name="password" type="password" placeholder="Enter password" required>
+        <p>
+        <input type="submit" value="Iniciar Sesion" class="button-style green-button">
+    </p>
     </form>
 {% endblock %}

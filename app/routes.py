@@ -17,32 +17,31 @@ catalogue = json.loads(catalogue_data)
 @app.route('/', methods = ['GET', 'POST'])
 @app.route('/index', methods = ['GET', 'POST'])
 def index():
-    if request.method == 'POST':
-        filtracion = filtrar(catalogue, request)
-        return render_template('index.html', movies = filtracion)
-    else:
-        return render_template('index.html', title = "Home", movies=catalogue['peliculas'])
+	if request.method == 'POST':
+		filtracion = filtrar(catalogue, request)
+		return render_template('index.html', movies = filtracion)
+	else:
+		return render_template('index.html', title = "Home", movies=catalogue['peliculas'])
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    # doc sobre request object en http://flask.pocoo.org/docs/1.0/api/#incoming-request-data
-    if 'username' in request.form:
-        # aqui se deberia validar con fichero .dat del usuario
-        if request.form['username'] == 'pp':
-            session['usuario'] = request.form['username']
-            session.modified=True
-            # se puede usar request.referrer para volver a la pagina desde la que se hizo login
-            return redirect(url_for('index'))
-        else:
-            # aqui se le puede pasar como argumento un mensaje de login invalido
-            return render_template('login.html', title = "Sign In")
-    else:
-        # se puede guardar la pagina desde la que se invoca 
-        session['url_origen']=request.referrer
-        session.modified=True        
-        # print a error.log de Apache si se ejecuta bajo mod_wsgi
-        print (request.referrer, file=sys.stderr)
-        return render_template('login.html', title = "Sign In")
+	# doc sobre request object en http://flask.pocoo.org/docs/1.0/api/#incoming-request-data
+	if 'username' in request.form:
+		try:
+			comprobacionUsuario(request.form['username'], request.form['password'])
+			session['usuario'] = request.form['username']
+			session.modified=True
+			# se puede usar request.referrer para volver a la pagina desde la que se hizo login
+			return redirect(url_for('index'))
+		except Exception as error:
+			return render_template('login.html', title = "Sign In", mensaje_error=error)
+	else:
+		# se puede guardar la pagina desde la que se invoca 
+		session['url_origen']=request.referrer
+		session.modified=True        
+		# print a error.log de Apache si se ejecuta bajo mod_wsgi
+		print (request.referrer, file=sys.stderr)
+		return render_template('login.html', title = "Sign In")
 
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
@@ -54,18 +53,15 @@ def logout():
 def registro():
 	if request.method == 'POST':
 		try: 
-			crearUsuario(request.form["usuario"], request.form["clave"], request.form["correo"], request.form["tarjeta" ])
+			crearUsuario(request.form.to_dict())
+			session['usuario'] = request.form['usuario']
 			return redirect(url_for('index'))
 
 		except Exception as error:
-			return redirect(url_for('registro'))
+			return render_template('registro.html', title = "Registro", mensaje_error=error)
 
 	else:
-		return render_template('registro.html')    
-
-@app.route('/indexregistrado', methods=['GET', 'POST'])
-def indexregistrado():
-    return render_template('indexregistrado.html')
+		return render_template('registro.html', title = "Registro")    
 
 @app.route('/carrito', methods=['GET', 'POST'])
 def carrito():
@@ -91,6 +87,8 @@ def descripcion(id_pelicula):
 	
 	return render_template('descripcion.html', peli = listaPeliculas[id_pelicula])
 	
+""" Funciones AJAX """
+
 @app.route('/_return_random_number', methods=['GET', 'POST'])
 def return_random_number():
 	return jsonify(result=random.randint(1000,2000))
