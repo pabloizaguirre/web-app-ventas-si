@@ -5,6 +5,7 @@ from app import app
 from flask import render_template, request, url_for, redirect, session, jsonify
 from app.busquedapelicula import filtrar_busqueda, filtrar_categoria
 from app.usuario import crearUsuario, comprobacionUsuario
+from app.compra import ejecutar_compra, precio_total_carrito, saldo
 import json
 import os
 import sys
@@ -73,7 +74,12 @@ def registro():
 
 @app.route('/carrito', methods=['GET', 'POST'])
 def carrito():
-	return render_template('carrito.html', movies=catalogue['peliculas'])
+	total = 0
+
+	if 'carrito' in session:
+		total = precio_total_carrito(session['carrito'], catalogue['peliculas'])
+
+	return render_template('carrito.html', movies=catalogue['peliculas'], total=total)
 
 @app.route('/descripcion/<id_pelicula>', methods=['GET', 'POST'])
 def descripcion(id_pelicula):
@@ -120,11 +126,14 @@ def remove_from_cart():
 	id_pelicula = request.args.get('film_id', type=str)
 
 	if 'carrito' in session:
-		if session['carrito'][id_pelicula] > 0:
+		if session['carrito'][id_pelicula] > 1:
 			session['carrito'][id_pelicula] -= 1
 			session.modified=True
 		else:
 			del session['carrito'][id_pelicula]
+			session.modified=True
+			if not session['carrito']:
+				session.pop('carrito', None)
 	else:
 		session['carrito'] = Counter([id_pelicula])
 		session.modified=True
@@ -134,6 +143,14 @@ def remove_from_cart():
 def vaciar_carrito():
 	session.pop('carrito', None)
 	return
+
+@app.route('/_finalizar_compra', methods=['GET', 'POST'])
+def finalizar_compra():
+	if 'usuario' not in session:
+		return jsonify(usuario=0, registro_url=url_for('registro', necesario_registro=True))
+	if not ejecutar_compra(session['carrito'], catalogue['peliculas'], app):
+		return jsonify(usuario=1, suficiente_saldo=0)
+	return jsonify(usuario=1, suficiente_saldo=1)
 
 @app.route('/_introducir_valoracion', methods=['GET', 'POST'])
 def introducir_valoracion():
@@ -158,3 +175,7 @@ def introducir_valoracion():
 		json.dump(catalogue, catalogueFile, indent=4)
 
 	return jsonify(valorada=0)
+
+@app.route('/_get_saldo', methods=['GET', 'POST'])
+def get_saldo():
+	return jsonify(result=saldo())

@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import os, hashlib, random
+import fileinput
 
 def crearUsuario(form):
 
@@ -9,6 +10,9 @@ def crearUsuario(form):
 		raise Exception("Faltan campos")
 
 	appDir = os.path.dirname(os.path.abspath(__file__))
+	if not os.path.exists(os.path.join(appDir, '../si1users/')):
+		os.mkdir('si1users')
+
 	dirUsuario = os.path.join(appDir, '../si1users/' + form['usuario'])
 
 	if os.path.exists(dirUsuario):

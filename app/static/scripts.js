@@ -1,3 +1,6 @@
+
+/* Carrito */
+
 $(function () {
     $('.add-to-cart, .add-to-cart-plus').bind('click', function () {
         const film_id = $(this).attr('id').split("-").slice(-1)[0]
@@ -7,7 +10,7 @@ $(function () {
 
         if ($(this).attr('class').split(' ')[0] == 'add-to-cart-plus') {
             const num = $('#cart-count-' + film_id).text()
-            $('#cart-count-' + film_id).text(parseInt(num) + 1)
+            location.reload();
         }
         else {
             displayMessage('Añadido al carrito')
@@ -24,14 +27,14 @@ $(function () {
             function (data) { });
         const num = parseInt($('#cart-count-' + film_id).text())
         if (num > 0) {
-            $('#cart-count-' + film_id).text(num - 1)
+            location.reload();
         }
         return false;
     });
 });
 
 $(function () {
-    $('button#vaciar-carrito').bind('click', function () {
+    $('button.vaciar-carrito').bind('click', function () {
         $.getJSON($SCRIPT_ROOT + '/_vaciar_carrito',
             {},
             function (data) { });
@@ -40,6 +43,33 @@ $(function () {
     });
 
 });
+
+/* Finalizar compra */
+
+$(function () {
+    $('button#finalizar-compra').bind('click', function () {
+        $.getJSON($SCRIPT_ROOT + '/_finalizar_compra',
+            {},
+            function (data) {
+                if(data.usuario==0){
+                    window.location.href = data.registro_url
+                } else if(data.suficiente_saldo==0){
+                    displayMessage("No tienes suficiente saldo", error=true)
+                } else{
+                    displayMessage("Se ha procedido con la compra! Pronto recibirá su pedido.")
+                }
+             });
+        location.reload(); 
+        return false;
+    });
+
+});
+
+function actualizarSaldo() {
+    $.getJSON($SCRIPT_ROOT + '/_get_saldo', {}, function (data) {
+        $("#saldo-header").text('Saldo: ' + data.result);
+    });
+}
 
 function displayMessage(message, error=false) {
     if(error){

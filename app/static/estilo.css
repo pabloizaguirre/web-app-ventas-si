@@ -230,11 +230,13 @@ button:active,
 	margin-bottom: 1em;
 }
 
-button#vaciar-carrito {
+.vaciar-carrito {
 	background-color: rgb(255, 211, 211);
 	font-size: small;
 	line-height: 30px;
 	min-width: 50px;
+	margin-top: 1em;
+	margin-bottom: 1em;
 }
 
 /* Estrellas */

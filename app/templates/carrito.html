@@ -6,9 +6,11 @@
 
 {% block content %}
 
-<div class='page-title'>
-    Carrito
-</div>
+<div class='page-title'>Carrito</div>
+
+{% if 'carrito' in session %}
+    <button type="button" class="vaciar-carrito">Vaciar</button>
+{% endif %}
 
 <div>
     {% if not 'carrito' in session %}
@@ -18,7 +20,9 @@
             <div class="cart-element">
                 <a href="{{ url_for('descripcion', id_pelicula = id) }}">
                 {{ movies[id].titulo }}
+                
             </a>
+            <span>Precio: {{ movies[id].precio ~ '€.'}}</span>
                 Unidades: 
                 <span class="cart-count" id="cart-count-{{ id }}">{{ num }} </span>
                 
@@ -31,7 +35,8 @@
     {% endif %}
 </div>
 {% if 'carrito' in session %}
-    <button type="button" id="vaciar-carrito">Vaciar</button>
-    {% endif %}
+    <div id="total-price-carrito">Precio total: {{ total }}</div>
+    <button type="button" id="finalizar-compra" class="green-button">Finalizar compra</button>
+{% endif %}
 {% endblock%}
 

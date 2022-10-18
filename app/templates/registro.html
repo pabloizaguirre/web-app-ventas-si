@@ -12,6 +12,12 @@
 </script>
 {% endif %}
 
+{% if 'necesario_registro' in request.args %}
+<script>
+    displayMessage("Para proceder con la compra debes registrarte o iniciar sesión", error = true);
+</script>
+{% endif %}
+
 <form action="" method="POST" name="formu" onsubmit="return comprobarClave()">
     <p>
         Usuario:

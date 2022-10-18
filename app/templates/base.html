@@ -17,6 +17,8 @@
 <body>
     <div class="header">
         VideoClub:
+        <span id="saldo-header">Saldo:</span>
+        <script>actualizarSaldo()</script>
         {% if not session['usuario'] %}
         <span>Usuario:desconocido</span>
         {% else %}
