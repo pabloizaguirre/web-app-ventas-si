@@ -3,7 +3,7 @@
 
 from flask import request
 
-def filtrar(listapeliculas, request):
+def filtrar_busqueda(listapeliculas, request):
 	listado = {}
 	
 	seleccionado = request.form['texto_busqueda'].lower()
@@ -18,3 +18,11 @@ def filtrar(listapeliculas, request):
 	else:
 		return listapeliculas['peliculas']
 
+def filtrar_categoria(listaPeliculas, request):
+	listado = {}
+	categoria = request.form['categorias']
+	for id, pelicula in listaPeliculas['peliculas'].items():
+		if pelicula['categoria'] == categoria:
+			listado[id] = pelicula
+	
+	return listado

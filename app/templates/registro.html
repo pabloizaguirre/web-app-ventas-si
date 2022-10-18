@@ -1,18 +1,18 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    {{ title }}
+{{ title }}
 {% endblock%}
 
 {% block content %}
 
 {% if mensaje_error %}
-    <script>
-        displayMessage("{{ mensaje_error }}", error=true);
-    </script>
+<script>
+    displayMessage("{{ mensaje_error }}", error = true);
+</script>
 {% endif %}
 
-<form action="" method="POST" name ="formu" onsubmit = "return comprobarClave()">
+<form action="" method="POST" name="formu" onsubmit="return comprobarClave()">
     <p>
         Usuario:
         <input name="usuario" type="text" MINLENGTH="5">
@@ -28,7 +28,7 @@
     </p>
     <p>
         Confirmación:
-        <input name="clave-confirmar" type="password"  MINLENGTH="6">
+        <input name="clave-confirmar" type="password" MINLENGTH="6">
     </p>
     <p>
         Tarjeta de crédito:
@@ -39,8 +39,8 @@
         <input name="direccion" type="text" MAXLENGTH="50">
     </p>
     <p>
-        <input type = "submit" value = "Registrar" class="button-style green-button">
+        <input type="submit" value="Registrar" class="button-style green-button">
     </p>
-</form>	
+</form>
 
 {% endblock%}

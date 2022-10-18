@@ -3,7 +3,7 @@
 
 from app import app
 from flask import render_template, request, url_for, redirect, session, jsonify
-from app.busquedapelicula import filtrar
+from app.busquedapelicula import filtrar_busqueda, filtrar_categoria
 from app.usuario import crearUsuario, comprobacionUsuario
 import json
 import os
@@ -19,10 +19,14 @@ catalogue = json.loads(catalogue_data)
 def index():
 	# Creamos la lista con las categorias de peliculas
 	categorias = list(set(map(lambda x: x['categoria'], catalogue['peliculas'].values())))
-	print(categorias)
+
 	if request.method == 'POST':
-		filtracion = filtrar(catalogue, request)
+		if 'texto_busqueda' in request.form:
+			filtracion = filtrar_busqueda(catalogue, request)
+		else:
+			filtracion = filtrar_categoria(catalogue, request)
 		return render_template('index.html', title = "Home", movies = filtracion, categorias=categorias)
+
 	else:
 		return render_template('index.html', title = "Home", movies=catalogue['peliculas'], categorias=categorias)
 
