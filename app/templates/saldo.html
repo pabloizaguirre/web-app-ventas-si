@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock%}
+
+{% block content %}
+
+<div class='page-title'>Saldo</div>
+
+{% if mensaje %}
+<script>
+    displayMessage("{{ mensaje }}", error = false);
+</script>
+{% endif %}
+
+<div>
+    <span>Saldo actual: {{ saldo }}</span>
+    <form action="" method="post">
+        <label>Introducir saldo</label>
+        <input id="input-saldo" name="saldo" type="number" step="0.01" placeholder="Introduce saldo en euros" required>
+        <input type="submit" value="Introducir" class="button-style green-button">
+    </form>
+</div>
+{% endblock%}
+

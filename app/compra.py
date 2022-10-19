@@ -55,7 +55,7 @@ def getHistorial():
     return compras
 
 
-def saldo():
+def saldo_from_file():
     directorioU =  'si1users/' + session['usuario'] + '/userdata.dat'
     if not(os.path.exists(directorioU)):
         raise Exception("Nombre de usuario incorrecto")
@@ -66,3 +66,21 @@ def saldo():
     
     return float(content[4])
 
+def introducir_saldo(cantidad):
+    directorioU =  'si1users/' + session['usuario'] + '/userdata.dat'
+    if not(os.path.exists(directorioU)):
+        raise Exception("Nombre de usuario incorrecto")
+
+    file = open(directorioU, 'r')
+
+    content = file.readlines()
+
+    content[4] = str(float(content[4]) + cantidad)
+
+    file.close()
+
+    a_file = open(directorioU, "w")
+    a_file.writelines(content)
+    a_file.close()
+
+    return content[4]

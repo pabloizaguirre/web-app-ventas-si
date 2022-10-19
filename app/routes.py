@@ -4,8 +4,8 @@
 from app import app
 from flask import render_template, request, url_for, redirect, session, jsonify
 from app.busquedapelicula import filtrar_busqueda, filtrar_categoria
-from app.usuario import crearUsuario, comprobacionUsuario
-from app.compra import ejecutar_compra, precio_total_carrito, saldo, getHistorial
+from app.usuario import crearUsuario, comprobacionUsuario, get_tarjeta
+from app.compra import ejecutar_compra, introducir_saldo, precio_total_carrito, getHistorial, saldo_from_file
 import json
 import os
 import sys
@@ -84,6 +84,14 @@ def carrito():
 @app.route('/historial', methods=['GET', 'POST'])
 def historial():
 	return render_template('historial.html', title="Historial de compras", historial=getHistorial(), movies=catalogue['peliculas'])
+
+@app.route('/saldo', methods=['GET', 'POST'])
+def saldo():
+	if request.method == 'POST':
+		introducir_saldo(float(request.form['saldo']))
+		num_tarjeta = get_tarjeta()
+		return render_template('saldo.html', title="Saldo", saldo=saldo_from_file(), mensaje="Se ha hecho un cargo de " + request.form['saldo'] + "€ en la tarjeta: ************" + num_tarjeta[-5:-1])
+	return render_template('saldo.html', title="Saldo", saldo=saldo_from_file())
 
 
 @app.route('/descripcion/<id_pelicula>', methods=['GET', 'POST'])
@@ -183,4 +191,4 @@ def introducir_valoracion():
 
 @app.route('/_get_saldo', methods=['GET', 'POST'])
 def get_saldo():
-	return jsonify(result=saldo())
+	return jsonify(result=saldo_from_file())

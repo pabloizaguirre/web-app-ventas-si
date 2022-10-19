@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import os, hashlib, random
-import fileinput
+from flask import session
 
 def crearUsuario(form):
 
@@ -64,3 +64,15 @@ def comprobacionUsuario(nombreUsuario, clave):
 		raise Exception("La clave no es correcta")
 
 	file.close()
+
+def get_tarjeta():
+	directorioU =  'si1users/' + session['usuario'] + '/userdata.dat'
+	
+	if not(os.path.exists(directorioU)):
+		raise Exception("Nombre de usuario incorrecto")
+
+	file = open(directorioU, 'r')
+	content = file.readlines()
+	file.close()
+
+	return content[3]

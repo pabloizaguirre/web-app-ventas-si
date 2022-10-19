@@ -315,3 +315,11 @@ table, th, td {
 .separador-historial-compra {
 	padding-top: 1em;
 }
+
+/* saldo */
+
+#input-saldo {
+	padding: 10px;
+	border-radius: 15px;
+	min-width: 13em;
+}

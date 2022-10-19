@@ -30,7 +30,7 @@
     {% endif %}
     {% for item in movies.values() %}
     <div class="movie-container" , id="{{ item.id }}"
-        onclick="location.href='{{ url_for('descripcion', id_pelicula = item.id)  }}';" style="cursor: pointer;">
+        onclick="location.href='{{ url_for('descripcion', id_pelicula = item.id)  }}';">
         <img src=" {{ url_for('static', filename='img/' + item.poster) }} ">
         <div class="movie-container-texto">
             <span class="movie-container-title">{{ item.titulo }}</span>
