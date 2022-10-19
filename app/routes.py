@@ -5,7 +5,7 @@ from app import app
 from flask import render_template, request, url_for, redirect, session, jsonify
 from app.busquedapelicula import filtrar_busqueda, filtrar_categoria
 from app.usuario import crearUsuario, comprobacionUsuario
-from app.compra import ejecutar_compra, precio_total_carrito, saldo
+from app.compra import ejecutar_compra, precio_total_carrito, saldo, getHistorial
 import json
 import os
 import sys
@@ -81,6 +81,11 @@ def carrito():
 
 	return render_template('carrito.html', movies=catalogue['peliculas'], total=total)
 
+@app.route('/historial', methods=['GET', 'POST'])
+def historial():
+	return render_template('historial.html', title="Historial de compras", historial=getHistorial(), movies=catalogue['peliculas'])
+
+
 @app.route('/descripcion/<id_pelicula>', methods=['GET', 'POST'])
 def descripcion(id_pelicula):
 
@@ -142,15 +147,15 @@ def remove_from_cart():
 @app.route('/_vaciar_carrito', methods=['GET', 'POST'])
 def vaciar_carrito():
 	session.pop('carrito', None)
-	return
+	return jsonify(result=1)
 
 @app.route('/_finalizar_compra', methods=['GET', 'POST'])
 def finalizar_compra():
 	if 'usuario' not in session:
-		return jsonify(usuario=0, registro_url=url_for('registro', necesario_registro=True))
+		return jsonify(usuario=0, url=url_for('registro', necesario_registro=True))
 	if not ejecutar_compra(session['carrito'], catalogue['peliculas'], app):
 		return jsonify(usuario=1, suficiente_saldo=0)
-	return jsonify(usuario=1, suficiente_saldo=1)
+	return jsonify(usuario=1, suficiente_saldo=1, url=url_for('carrito', mensaje_compra_confirmada=True))
 
 @app.route('/_introducir_valoracion', methods=['GET', 'POST'])
 def introducir_valoracion():

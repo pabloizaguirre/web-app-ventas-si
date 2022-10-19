@@ -32,7 +32,7 @@ def ejecutar_compra(carrito, peliculas, app):
 
     compra = []
     for id, num in carrito.items():
-        compra.append({id: num})
+        compra.append({"id": id, "cantidad": num})
 
     compras.append(compra)
 
@@ -47,6 +47,12 @@ def ejecutar_compra(carrito, peliculas, app):
         json.dump(compras, catalogueFile, indent=4)
 
     return True
+
+def getHistorial():
+    directorioC =  'si1users/' + session['usuario'] + '/compras.json'
+    comprasData = open(directorioC, 'r', encoding="utf-8").read()
+    compras = json.loads(comprasData)
+    return compras
 
 
 def saldo():

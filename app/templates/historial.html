@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock%}
+
+{% block content %}
+
+<div class='page-title'>Historial de compras</div>
+
+<div>
+    <table>
+        
+        {% for compra in historial %}
+            <tr>
+                <td colspan="2" class="separador-historial-compra">Compra {{ loop.index }}</td>
+            </tr>
+            <tr>
+                <th>Películas</th>
+                <th>Unidades</th>
+              </tr>
+            {% for pelicula in compra %}
+                <tr>
+                    <td>{{ movies[pelicula['id']]['titulo'] }}</td>
+                    <td>{{ pelicula['cantidad'] }}</td>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+      </table>
+</div>
+{% endblock%}
+

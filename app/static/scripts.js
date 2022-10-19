@@ -51,15 +51,18 @@ $(function () {
         $.getJSON($SCRIPT_ROOT + '/_finalizar_compra',
             {},
             function (data) {
-                if(data.usuario==0){
-                    window.location.href = data.registro_url
-                } else if(data.suficiente_saldo==0){
-                    displayMessage("No tienes suficiente saldo", error=true)
-                } else{
-                    displayMessage("Se ha procedido con la compra! Pronto recibirá su pedido.")
+                if (data.usuario == 0) {
+                    window.location.href = data.url
+                } else if (data.suficiente_saldo == 0) {
+                    displayMessage("No tienes suficiente saldo", error = true)
+                } else {
+                    $.getJSON($SCRIPT_ROOT + '/_vaciar_carrito',
+                        {},
+                        function (data) { }
+                    );
+                    window.location.href = data.url
                 }
-             });
-        location.reload(); 
+            });
         return false;
     });
 
@@ -67,12 +70,12 @@ $(function () {
 
 function actualizarSaldo() {
     $.getJSON($SCRIPT_ROOT + '/_get_saldo', {}, function (data) {
-        $("#saldo-header").text('Saldo: ' + data.result);
+        $("#saldo-header").text('Saldo: ' + data.result + "€");
     });
 }
 
-function displayMessage(message, error=false) {
-    if(error){
+function displayMessage(message, error = false) {
+    if (error) {
         $('#message').css("background-color", "rgb(255, 160, 160)");
     }
     $('#message-container').show()
@@ -87,7 +90,7 @@ function displayMessage(message, error=false) {
         })
         setTimeout(function () {
             $('#message-container').hide()
-            if(error) {
+            if (error) {
                 $('#message').css("background-color", "rgb(255, 255, 255)");
             }
         }, 1000);
@@ -116,13 +119,13 @@ $(function () {
             valoracion: valoracion,
             film_id: window.location.pathname.split('/').slice(-1)[0]
         }, function (data) {
-            if(data.valorada) {
-                displayMessage('Ya has valorado esta pelicula', error=true);
+            if (data.valorada) {
+                displayMessage('Ya has valorado esta pelicula', error = true);
                 return false;
             }
         });
         message = 'Introducida valoracion de ' + valoracion + ' estrella'
-        if(valoracion > '1'){
+        if (valoracion > '1') {
             message += 's'
         }
         displayMessage(message)
@@ -143,7 +146,7 @@ function comprobarClave() {
     clave2 = document.forms["formu"]["clave-confirmar"].value;
 
     if (clave1 != clave2) {
-        displayMessage('Las dos claves son distintas', error=true);
+        displayMessage('Las dos claves son distintas', error = true);
         return false;
     }
 }
@@ -193,7 +196,7 @@ function seguridad_clave(clave) {
     }
 
     return retorno;
-}		
+}
 
 /* Set index movies colors */
 

@@ -18,7 +18,7 @@ body {
 	position: fixed;
 	left: 0;
 	top: 50px;
-	width: 14%;
+	width: 16%;
 	height: 95%;
 	display: flex;
 	padding: 1%;
@@ -47,7 +47,7 @@ button.side {
 	bottom: 40px;
 	margin-bottom: 40px;
 	margin-top: 50px;
-	width: 84%;
+	width: 82%;
 	z-index: -1;
 
 }
@@ -222,18 +222,26 @@ button:active,
 	background-color: rgb(214, 244, 238);
 }
 
+/* Carrito */
+
 .remove-from-cart {
 	background-color: rgb(255, 211, 211);
 }
 
 .cart-element {
-	margin-bottom: 1em;
+	padding-top: 10px;
+	padding-bottom: 5px;
+}
+
+.no-bottom-border{
+	border: none;
+	padding-bottom: 10px;
 }
 
 .vaciar-carrito {
 	background-color: rgb(255, 211, 211);
 	font-size: small;
-	line-height: 30px;
+	line-height: 20px;
 	min-width: 50px;
 	margin-top: 1em;
 	margin-bottom: 1em;
@@ -296,4 +304,14 @@ svg {
 .rating__value {
 	fill: #FFB94B;
 	height: 100%;
+}
+
+table, th, td {
+	border-bottom: 1px solid rgb(192, 192, 192);
+	border-collapse: collapse;
+	padding-right: 1em;
+}
+
+.separador-historial-compra {
+	padding-top: 1em;
 }

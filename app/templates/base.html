@@ -17,12 +17,12 @@
 <body>
     <div class="header">
         VideoClub:
+        {% if not session['usuario'] %}
+        <span>Usuario: desconocido</span>
+        {% else %}
         <span id="saldo-header">Saldo:</span>
         <script>actualizarSaldo()</script>
-        {% if not session['usuario'] %}
-        <span>Usuario:desconocido</span>
-        {% else %}
-        <span>Usuario:{{ session['usuario'] }}</span>
+        <span>Usuario: {{ session['usuario'] }}</span>
         {% endif%}
         <span id="user-count"></span>
     </div>
@@ -38,9 +38,9 @@
         <a href="{{ url_for('registro') }}"><button class="side">Registro</button></a>
 
         {% else %}
+        <a href="{{ url_for('historial') }}"><button class="side">Historial Compras</button></a>
         <a href="{{ url_for('logout') }}"><button class="side">Cerrar Sesion</button></a>
         {% endif%}
-        {{ session['carrito'] }}
     </div>
 
     <div class="content">
