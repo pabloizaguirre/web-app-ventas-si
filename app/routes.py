@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from app import app
-from flask import render_template, request, url_for, redirect, session, jsonify
+from flask import render_template, request, url_for, redirect, session, jsonify, make_response
 from app.busquedapelicula import filtrar_busqueda, filtrar_categoria
 from app.usuario import crearUsuario, comprobacionUsuario, get_tarjeta
 from app.compra import ejecutar_compra, introducir_saldo, precio_total_carrito, getHistorial, saldo_from_file
@@ -41,7 +41,9 @@ def login():
 			session['usuario'] = request.form['username']
 			session.modified=True
 			# se puede usar request.referrer para volver a la pagina desde la que se hizo login
-			return redirect(url_for('index'))
+			response = make_response(redirect(url_for('index')))
+			response.set_cookie('lastUser', session['usuario'])
+			return response
 		except Exception as error:
 			return render_template('login.html', title = "Sign In", mensaje_error=error)
 	else:
@@ -50,6 +52,11 @@ def login():
 		session.modified=True        
 		# print a error.log de Apache si se ejecuta bajo mod_wsgi
 		print (request.referrer, file=sys.stderr)
+		print("asdasdasd")
+		if 'lastUser' in request.cookies:
+			print("bvbvbvb")
+			print(request.cookies.get('lastUser'))
+			return render_template('login.html', title = "Sign In", user = request.cookies.get('lastUser') )
 		return render_template('login.html', title = "Sign In")
 
 @app.route('/logout', methods=['GET', 'POST'])
