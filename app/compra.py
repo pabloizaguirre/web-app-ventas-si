@@ -50,6 +50,8 @@ def ejecutar_compra(carrito, peliculas, app):
 
 def getHistorial():
     directorioC =  'si1users/' + session['usuario'] + '/compras.json'
+    if os.stat(directorioC).st_size == 0:
+    	return []
     comprasData = open(directorioC, 'r', encoding="utf-8").read()
     compras = json.loads(comprasData)
     return compras
