@@ -79,7 +79,7 @@ def carrito():
 	if 'carrito' in session:
 		total = precio_total_carrito(session['carrito'], catalogue['peliculas'])
 
-	return render_template('carrito.html', movies=catalogue['peliculas'], total=total)
+	return render_template('carrito.html', title = "Carrito", movies=catalogue['peliculas'], total=total)
 
 @app.route('/historial', methods=['GET', 'POST'])
 def historial():
@@ -115,7 +115,7 @@ def descripcion(id_pelicula):
 		
 		return redirect(url_for("index"))
 
-	return render_template('descripcion.html', peli = listaPeliculas[id_pelicula])
+	return render_template('descripcion.html', title = listaPeliculas[id_pelicula]['titulo'], peli = listaPeliculas[id_pelicula])
 	
 """ Funciones AJAX """
 

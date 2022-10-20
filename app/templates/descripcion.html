@@ -1,13 +1,17 @@
 {% extends 'base.html' %}
 
-{% block register %}{% endblock%}
-{% block carrito %}{% endblock%}
+{% block title %}
+{{ title }}
+{% endblock%}
 
 {% block content%}
+
+<div class='page-title'>{{ peli.titulo }}</div>
+
 <div class="informacion-pelicula">
 	<img src="{{ url_for('static', filename='img/' + peli.poster) }}" alt="{{ peli.titulo }}">
 	<div class="descripcionPelicula">
-		<p><b>Titulo: </b>{{ peli.titulo }}</p><br>
+		<p><b>Precio: </b>{{ peli.precio }}€</p><br>
 		<p><b>Fecha: </b>{{ peli.año }}</p><br>
 		<p><b>Sinopsis: </b>{{ peli.sinopsis }}</p><br>
 		<p><b>Criticas: </b>{{ peli.criticas }}</p><br>

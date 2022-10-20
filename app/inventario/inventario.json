@@ -6,6 +6,7 @@
             "poster": "guerraepisodio1.jpg",
             "director": "George Lucas",
             "precio": 18.99,
+            "stock": 100,
             "categoria": "Aventura",
             "a\u00f1o": 1999,
             "actores": [
@@ -16,8 +17,8 @@
                 }
             ],
             "sinopsis": "La Rep\u00fablica Gal\u00e1ctica est\u00e1 sumida en el caos. Los impuestos de las rutas comerciales a los sistemas estelares exteriores est\u00e1n en disputa. Esperando resolver el asunto con un bloqueo de poderosas naves de guerra, la codiciosa Federaci\u00f3n del Comercio ha detenido todos los env\u00edos al peque\u00f1o planeta de Naboo.",
-            "valoracion": 3.5555555555555554,
-            "numeroValoraciones": 9,
+            "valoracion": 3.8181818181818183,
+            "numeroValoraciones": 11,
             "criticas": "Desde un punto de vista cinematogr\u00e1fico, La amenaza fantasma es la peor de las seis pel\u00edculas de Star Wars, pero eso no quiere decir que sea mala, ni mucho menos, tan solo que est\u00e1 por debajo del nivel conseguido en la trilog\u00eda original y en el magn\u00edfico episodio que enlaza una con otra, La venganza de los Sith."
         },
         "2": {
@@ -26,6 +27,7 @@
             "poster": "avengers.jpeg",
             "director": "Joss Whedon",
             "precio": 13.4,
+            "stock": 10,
             "categoria": "Accion",
             "a\u00f1o": 2012,
             "actores": [
@@ -61,6 +63,7 @@
             "poster": "efecto-mariposa.jpeg",
             "director": "Eric Bress",
             "precio": 15,
+            "stock": 50,
             "categoria": "Drama",
             "a\u00f1o": 2004,
             "actores": [
@@ -84,6 +87,7 @@
             "poster": "efecto-mariposa.jpeg",
             "director": "Eric Bress",
             "precio": 15,
+            "stock": 10,
             "categoria": "Drama",
             "a\u00f1o": 2004,
             "actores": [

@@ -10,7 +10,9 @@
 
 <div>
     <table>
-        
+        {% if not historial|length %}
+            <div class='comment'> No se ha realizado ninguna compra todavía </div>
+        {% endif %}
         {% for compra in historial %}
             <tr>
                 <td colspan="2" class="separador-historial-compra">Compra {{ loop.index }}</td>
