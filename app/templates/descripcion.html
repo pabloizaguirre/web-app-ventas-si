@@ -6,12 +6,38 @@
 
 {% block content%}
 
+<div class="page-content">
 <div class='page-title'>{{ peli.titulo }}</div>
 
 <div class="informacion-pelicula">
 	<img src="{{ url_for('static', filename='img/' + peli.poster) }}" alt="{{ peli.titulo }}">
-	<div class="descripcionPelicula">
+	<div class="descripcion-pelicula">
 		<p><b>Precio: </b>{{ peli.precio }}€</p><br>
+		<p><b>Calificacion media: </b>
+			<svg viewBox="0 0 1000 200" class='rating' id="stars-datail">
+                <defs>
+
+                    <polygon id="star" points="100,0 131,66 200,76 150,128 162,200 100,166 38,200 50,128 0,76 69,66 " />
+
+                    <clipPath id="stars">
+                        <use xlink:href="#star" />
+                        <use xlink:href="#star" x="20%" />
+                        <use xlink:href="#star" x="40%" />
+                        <use xlink:href="#star" x="60%" />
+                        <use xlink:href="#star" x="80%" />
+                    </clipPath>
+
+                </defs>
+
+                <rect class='rating__background' clip-path="url(#stars)"></rect>
+
+                <!-- Change the width of this rect to change the rating -->
+                <rect width="{{ (peli.valoracion * 20) }}%" class='rating__value' clip-path="url(#stars)"></rect>
+
+            </svg>
+			{{ '%0.1f'| format(peli.valoracion|float) }}/5
+		
+		</p><br>
 		<p><b>Fecha: </b>{{ peli.año }}</p><br>
 		<p><b>Sinopsis: </b>{{ peli.sinopsis }}</p><br>
 		<p><b>Criticas: </b>{{ peli.criticas }}</p><br>
@@ -35,5 +61,5 @@
 		<label class="star star-1" for="star-1"></label>
 	</form>
 </div>
-
+</div>
 {% endblock %}

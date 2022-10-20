@@ -5,7 +5,7 @@
 {% endblock%}
 
 {% block content %}
-
+<div class="page-content">
 <div class='page-title'>Carrito</div>
 
 {% if 'mensaje_compra_confirmada' in request.args %}
@@ -60,4 +60,6 @@
 {% if 'carrito' in session %}
 <button type="button" id="finalizar-compra" class="green-button">Finalizar compra</button>
 {% endif %}
+
+</div>
 {% endblock%}

@@ -70,7 +70,7 @@ $(function () {
 
 function actualizarSaldo() {
     $.getJSON($SCRIPT_ROOT + '/_get_saldo', {}, function (data) {
-        $("#saldo-header").text('Saldo: ' + data.result + "€");
+        $("#saldo-side").text('Saldo: ' + data.result + "€");
     });
 }
 
@@ -82,7 +82,7 @@ function displayMessage(message, error = false) {
     $('#message').text(message)
 
     $('#message-container').animate({
-        top: '50px'
+        top: '60px'
     })
     setTimeout(function () {
         $('#message-container').animate({

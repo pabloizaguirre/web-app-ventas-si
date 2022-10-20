@@ -6,6 +6,7 @@
 
 {% block content %}
 
+<div class="page-content">
 {% if mensaje_error %}
 <script>
     displayMessage("{{ mensaje_error }}", error = true);
@@ -78,5 +79,5 @@
 
 
 </form>
-
+</div>
 {% endblock%}

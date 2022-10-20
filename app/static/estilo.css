@@ -29,6 +29,10 @@ body {
 button.side {
 	width: 100%;
 	margin-bottom: 10px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	-webkit-line-clamp: 1;
 }
 
 .footer {
@@ -46,11 +50,15 @@ button.side {
 	right: 0;
 	bottom: 40px;
 	margin-bottom: 40px;
-	margin-top: 50px;
+	margin-top: 60px;
 	width: 82%;
 	z-index: -1;
-
 }
+
+.page-content {
+	margin-left: 30px;
+}
+
 
 .comment {
 	color: rgb(129, 129, 129);
@@ -59,6 +67,7 @@ button.side {
 
 .page-title {
 	font-size: xx-large;
+	margin-left: -20px;
 
 }
 
@@ -66,7 +75,7 @@ button.side {
 
 #busqueda-index-container {
 	position: sticky;
-	top: 50px;
+	top: 60px;
 	z-index: 0;
 	left: 40%;
 	display: flex;
@@ -207,8 +216,12 @@ button:active,
 	padding: 10px;
 }
 
+.descripcion-pelicula {
+	margin-left: 0;
+}
+
 .informacion-pelicula img {
-	height: 300px;
+	width: 200px;
 }
 
 .small-button {
@@ -286,11 +299,17 @@ label.star:before {
 	content: '\2606';
 }
 
-/* Estrellas inicio */
+/* Estrellas */
 
 svg {
 	margin-bottom: 2em;
 	width: 5em;
+}
+
+svg#stars-datail {
+	margin-bottom: 0;
+	width: 5em;
+	height: 1em;
 }
 
 .rating__background {
@@ -338,4 +357,21 @@ table, th, td {
 	padding: 10px;
 	border-radius: 15px;
 	min-width: 13em;
+}
+
+#user-count{
+	position: fixed;
+	left: 1em;
+}
+
+#titulo-web {
+	margin-left: 8px;
+	color: rgb(0 0 0 / 0.6);
+	font-family: 'marker felt';
+	font-size: x-large;
+}
+
+.usuario-header {
+	position: fixed;
+	right: 1em;
 }

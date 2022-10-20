@@ -66,7 +66,7 @@ def saldo_from_file():
 
     content = file.readlines()
     
-    return float(content[4])
+    return round(float(content[4]),2)
 
 def introducir_saldo(cantidad):
     directorioU =  'si1users/' + session['usuario'] + '/userdata.dat'
