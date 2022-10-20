@@ -107,13 +107,14 @@ def descripcion(id_pelicula):
 		else:
 			session['carrito'] = Counter([id_pelicula])
 			session.modified=True
-
+		
 		return redirect(url_for('descripcion', id_pelicula=id_pelicula))
 	
 	listaPeliculas = catalogue["peliculas"]
 	if not id_pelicula in listaPeliculas:
+		
 		return redirect(url_for("index"))
-	
+
 	return render_template('descripcion.html', peli = listaPeliculas[id_pelicula])
 	
 """ Funciones AJAX """
@@ -132,7 +133,9 @@ def add_to_cart():
 	else:
 		session['carrito'] = Counter([id_pelicula])
 		session.modified=True
-	return
+		
+	listaPeliculas = catalogue["peliculas"]
+	return render_template('descripcion.html', peli = listaPeliculas[id_pelicula])
 
 @app.route('/_remove_from_cart', methods=['GET', 'POST'])
 def remove_from_cart():
