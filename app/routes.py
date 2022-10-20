@@ -23,9 +23,10 @@ def index():
 
 	if request.method == 'POST':
 		if 'texto_busqueda' in request.form:
-			filtracion = filtrar_busqueda(catalogue, request)
-		else:
-			filtracion = filtrar_categoria(catalogue, request)
+			filtracion = filtrar_busqueda(catalogue['peliculas'], request)
+		if request.form['categorias'] != '':
+			filtracion = filtrar_categoria(filtracion, request)
+
 		return render_template('index.html', title = "Home", movies = filtracion, categorias=categorias)
 
 	else:

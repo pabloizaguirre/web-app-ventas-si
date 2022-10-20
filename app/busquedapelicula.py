@@ -8,7 +8,7 @@ def filtrar_busqueda(listapeliculas, request):
 	
 	seleccionado = request.form['texto_busqueda'].lower()
 	if len(seleccionado) != 0 and seleccionado != "":
-		listaAux = listapeliculas["peliculas"]
+		listaAux = listapeliculas
 		for id, pelicula in listaAux.items():
 			titulo = pelicula["titulo"].lower()
 			if titulo.find(seleccionado) != -1:
@@ -16,12 +16,12 @@ def filtrar_busqueda(listapeliculas, request):
 		return listado
 
 	else:
-		return listapeliculas['peliculas']
+		return listapeliculas
 
 def filtrar_categoria(listaPeliculas, request):
 	listado = {}
 	categoria = request.form['categorias']
-	for id, pelicula in listaPeliculas['peliculas'].items():
+	for id, pelicula in listaPeliculas.items():
 		if pelicula['categoria'] == categoria:
 			listado[id] = pelicula
 	
