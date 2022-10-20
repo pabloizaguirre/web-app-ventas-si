@@ -139,6 +139,13 @@ $(function () {
 function muestra_seguridad_clave(clave, formulario) {
     seguridad = seguridad_clave(clave);
     formulario.seguridad.value = seguridad;
+    if(seguridad=='Débil'){
+        $("#medidor-fortaleza").css('color', 'rgb(233, 60, 70)')
+    } else if(seguridad=='Normal'){
+        $("#medidor-fortaleza").css('color', 'rgb(240	165	59	)')
+    } else {
+        $("#medidor-fortaleza").css('color', 'rgb(111, 201, 90)')
+    }
 }
 
 function comprobarClave() {
@@ -188,11 +195,11 @@ function seguridad_clave(clave) {
     }
 
     if (seguridad <= 100) {
-        retorno = "debil";
+        retorno = "Débil";
     } else if (seguridad > 100 && seguridad <= 240) {
-        retorno = "normal";
+        retorno = "Normal";
     } else {
-        retorno = "fuerte";
+        retorno = "Fuerte";
     }
 
     return retorno;
