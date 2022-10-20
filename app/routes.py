@@ -134,8 +134,7 @@ def add_to_cart():
 		session['carrito'] = Counter([id_pelicula])
 		session.modified=True
 		
-	listaPeliculas = catalogue["peliculas"]
-	return render_template('descripcion.html', peli = listaPeliculas[id_pelicula])
+	return jsonify(result=1)
 
 @app.route('/_remove_from_cart', methods=['GET', 'POST'])
 def remove_from_cart():
@@ -153,7 +152,7 @@ def remove_from_cart():
 	else:
 		session['carrito'] = Counter([id_pelicula])
 		session.modified=True
-	return
+	return jsonify(result=1)
 
 @app.route('/_vaciar_carrito', methods=['GET', 'POST'])
 def vaciar_carrito():
