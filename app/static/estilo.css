@@ -212,6 +212,8 @@ button:active,
 	-webkit-box-orient: vertical;
 }
 
+/* Detalle pelicula */
+
 .informacion-pelicula {
 	padding: 10px;
 }
@@ -221,7 +223,12 @@ button:active,
 }
 
 .informacion-pelicula img {
+	float: left;
+	margin-right: 20px;
+	margin-bottom: 10px;
 	width: 200px;
+	border-radius: 20px;
+	box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 }
 
 .small-button {
@@ -264,7 +271,6 @@ button:active,
 
 div.stars {
 	width: 300px;
-	display: inline-block;
 	font-weight: bold;
 }
 
@@ -337,6 +343,10 @@ table, th, td {
 
 /* registro */
 
+#tabla-registro td {
+	padding: 10px;
+}
+
 .registro-input {
 	background-color: rgb(0 0 0 / 0);
 	border-width: 1px;
@@ -365,7 +375,7 @@ table, th, td {
 }
 
 #titulo-web {
-	margin-left: 8px;
+	padding-left: 1%;
 	color: rgb(0 0 0 / 0.6);
 	font-family: 'marker felt';
 	font-size: x-large;

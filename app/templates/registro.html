@@ -7,77 +7,77 @@
 {% block content %}
 
 <div class="page-content">
-{% if mensaje_error %}
-<script>
-    displayMessage("{{ mensaje_error }}", error = true);
-</script>
-{% endif %}
+    {% if mensaje_error %}
+    <script>
+        displayMessage("{{ mensaje_error }}", error = true);
+    </script>
+    {% endif %}
 
-{% if 'necesario_registro' in request.args %}
-<script>
-    displayMessage("Para proceder con la compra debes registrarte o iniciar sesión", error = true);
-</script>
-{% endif %}
+    {% if 'necesario_registro' in request.args %}
+    <script>
+        displayMessage("Para proceder con la compra debes registrarte o iniciar sesión", error = true);
+    </script>
+    {% endif %}
 
-<div class='page-title'>Registro</div>
+    <div class='page-title'>Registro</div>
 
-<form action="" method="POST" name="formu" onsubmit="return comprobarClave()">
-    <table>
-        <tr>
-            <td>
-                Usuario:
-            </td>
-            <td>
-                <input class="registro-input" name="usuario" type="text" MINLENGTH="5">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Email:
-            </td>
-            <td>
-                <input class="registro-input" name="correo" type="email">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Clave:
-            </td>
-            <td>
-                <input class="registro-input" name="clave" type="password" MINLENGTH="6"
-                    onkeyup="muestra_seguridad_clave(this.value, this.form)">
-                <input id="medidor-fortaleza" name="seguridad" type="text" onfocus="blur()">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Confirmación:
-            </td>
-            <td>
-                <input class="registro-input" name="clave-confirmar" type="password" MINLENGTH="6">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Tarjeta de crédito:
-            </td>
-            <td>
-                <input class="registro-input" name="tarjeta" type="text" MINLENGTH="16" MAXLENGTH="16">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Dirección:
-            </td>
-            <td>
-                <input class="registro-input" name="direccion" type="text" MAXLENGTH="50">
-            </td>
-        </tr>
-    </table>
-    <p></p>
-    <input type="submit" value="Registrar" class="button-style green-button">
+    <form id="tabla-registro" action="" method="POST" name="formu" onsubmit="return comprobarClave()">
+        <table>
+            <tr>
+                <td>
+                    Usuario:
+                </td>
+                <td>
+                    <input class="registro-input" name="usuario" type="text" MINLENGTH="5">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Email:
+                </td>
+                <td>
+                    <input class="registro-input" name="correo" type="email">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Clave:
+                </td>
+                <td>
+                    <input class="registro-input" name="clave" type="password" MINLENGTH="6"
+                        onkeyup="muestra_seguridad_clave(this.value, this.form)">
+                    <input id="medidor-fortaleza" name="seguridad" type="text" onfocus="blur()">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Confirmación:
+                </td>
+                <td>
+                    <input class="registro-input" name="clave-confirmar" type="password" MINLENGTH="6">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Tarjeta de crédito:
+                </td>
+                <td>
+                    <input class="registro-input" name="tarjeta" type="text" MINLENGTH="16" MAXLENGTH="16">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Dirección:
+                </td>
+                <td>
+                    <input class="registro-input" name="direccion" type="text" MAXLENGTH="50">
+                </td>
+            </tr>
+        </table>
+        <p></p>
+        <input type="submit" value="Registrar" class="button-style green-button">
 
 
-</form>
+    </form>
 </div>
 {% endblock%}

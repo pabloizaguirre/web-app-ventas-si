@@ -1,35 +1,34 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    {{ title }}
+{{ title }}
 {% endblock%}
 
 {% block content %}
 <div class="page-content">
-<div class='page-title'>Historial de compras</div>
+    <div class='page-title'>Historial de compras</div>
 
-<div>
-    <table>
-        {% if not historial|length %}
+    <div>
+        <table>
+            {% if not historial|length %}
             <div class='comment'> No se ha realizado ninguna compra todavía </div>
-        {% endif %}
-        {% for compra in historial %}
+            {% endif %}
+            {% for compra in historial %}
             <tr>
                 <td colspan="2" class="separador-historial-compra">Compra {{ loop.index }}</td>
             </tr>
             <tr>
                 <th>Películas</th>
                 <th>Unidades</th>
-              </tr>
+            </tr>
             {% for pelicula in compra %}
-                <tr>
-                    <td>{{ movies[pelicula['id']]['titulo'] }}</td>
-                    <td>{{ pelicula['cantidad'] }}</td>
-                </tr>
+            <tr>
+                <td>{{ movies[pelicula['id']]['titulo'] }}</td>
+                <td>{{ pelicula['cantidad'] }}</td>
+            </tr>
             {% endfor %}
-        {% endfor %}
-      </table>
-</div>
+            {% endfor %}
+        </table>
+    </div>
 </div>
 {% endblock%}
-

@@ -6,60 +6,62 @@
 
 {% block content %}
 <div class="page-content">
-<div class='page-title'>Carrito</div>
+    <div class='page-title'>Carrito</div>
 
-{% if 'mensaje_compra_confirmada' in request.args %}
-<script>
-    displayMessage("Se ha procedido con la compra! Pronto recibirá su pedido.", error = false);
-</script>
-{% endif %}
-
-{% if 'carrito' in session %}
-<button type="button" class="vaciar-carrito">Vaciar</button>
-{% endif %}
-
-<div>
-    {% if not 'carrito' in session %}
-    <div class='comment'> Carrito vacio </div>
-    {% else %}
-    <table class="no-bottom-border">
-        <td class="cart-element">Pelicula</td>
-        <td class="cart-element">Precio</td>
-        <td class="cart-element">Unidades</td>
-        <td class="cart-element"></td>
-
-        {% for (id, num) in session['carrito'].items() %}
-
-        <tr>
-            <td class="cart-element">
-                <a href="{{ url_for('descripcion', id_pelicula = id) }}">
-                    {{ movies[id].titulo }}
-
-                </a>
-            </td>
-            <td class="cart-element">
-                {{ movies[id].precio ~ '€'}}
-            </td>
-            <td class="cart-element">
-                <span class="cart-count" id="cart-count-{{ id }}">{{ num }} </span>
-            </td>
-            <td class="cart-element">
-                <button type="button" class="add-to-cart-plus small-button" id="add-to-cart-plus-{{ id }}">+</button>
-                <button type="button" class="remove-from-cart small-button" id="remove-from-cart-{{ id }}">-</button>
-            </td>
-        </tr>
-
-        {% endfor %}
-        <td class="cart-element  no-bottom-border">Precio total</td>
-        <td class="cart-element  no-bottom-border">{{ total }}€</td>
-        <td class="cart-element  no-bottom-border"></td>
-        <td class="cart-element  no-bottom-border"></td>
-    </table>
+    {% if 'mensaje_compra_confirmada' in request.args %}
+    <script>
+        displayMessage("Se ha procedido con la compra! Pronto recibirá su pedido.", error = false);
+    </script>
     {% endif %}
-</div>
-{% if 'carrito' in session %}
-<button type="button" id="finalizar-compra" class="green-button">Finalizar compra</button>
-{% endif %}
+
+    {% if 'carrito' in session %}
+    <button type="button" class="vaciar-carrito">Vaciar</button>
+    {% endif %}
+
+    <div>
+        {% if not 'carrito' in session %}
+        <div class='comment'> Carrito vacio </div>
+        {% else %}
+        <table class="no-bottom-border">
+            <td class="cart-element">Pelicula</td>
+            <td class="cart-element">Precio</td>
+            <td class="cart-element">Unidades</td>
+            <td class="cart-element"></td>
+
+            {% for (id, num) in session['carrito'].items() %}
+
+            <tr>
+                <td class="cart-element">
+                    <a href="{{ url_for('descripcion', id_pelicula = id) }}">
+                        {{ movies[id].titulo }}
+
+                    </a>
+                </td>
+                <td class="cart-element">
+                    {{ movies[id].precio ~ '€'}}
+                </td>
+                <td class="cart-element">
+                    <span class="cart-count" id="cart-count-{{ id }}">{{ num }} </span>
+                </td>
+                <td class="cart-element">
+                    <button type="button" class="add-to-cart-plus small-button"
+                        id="add-to-cart-plus-{{ id }}">+</button>
+                    <button type="button" class="remove-from-cart small-button"
+                        id="remove-from-cart-{{ id }}">-</button>
+                </td>
+            </tr>
+
+            {% endfor %}
+            <td class="cart-element  no-bottom-border">Precio total</td>
+            <td class="cart-element  no-bottom-border">{{ total }}€</td>
+            <td class="cart-element  no-bottom-border"></td>
+            <td class="cart-element  no-bottom-border"></td>
+        </table>
+        {% endif %}
+    </div>
+    {% if 'carrito' in session %}
+    <button type="button" id="finalizar-compra" class="green-button">Finalizar compra</button>
+    {% endif %}
 
 </div>
 {% endblock%}

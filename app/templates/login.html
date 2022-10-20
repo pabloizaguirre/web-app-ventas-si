@@ -1,21 +1,21 @@
 {% extends "base.html" %}
 
 {% block title %}
-    {{ title }}
+{{ title }}
 {% endblock%}
 
 {% block register %}
-   <a href="{{ url_for('registro') }}">registro</a>
+<a href="{{ url_for('registro') }}">registro</a>
 {% endblock%}
 
 {% block content %}
 
-    {% if mensaje_error %}
-        <script>
-            displayMessage("{{ mensaje_error }}", error=true);
-        </script>
-    {% endif %}
-    <div class="page-content">
+{% if mensaje_error %}
+<script>
+    displayMessage("{{ mensaje_error }}", error = true);
+</script>
+{% endif %}
+<div class="page-content">
     <div class='page-title'>Iniciar sesión</div>
     <form action="" method="post">
         <label>Username: </label>
@@ -23,8 +23,8 @@
         <label>Password: </label>
         <input name="password" type="password" placeholder="Enter password" required>
         <p>
-        <input type="submit" value="Iniciar Sesion" class="button-style green-button">
-    </p>
+            <input type="submit" value="Iniciar Sesion" class="button-style green-button">
+        </p>
     </form>
-    </div>
+</div>
 {% endblock %}

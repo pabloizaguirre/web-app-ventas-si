@@ -7,59 +7,61 @@
 {% block content%}
 
 <div class="page-content">
-<div class='page-title'>{{ peli.titulo }}</div>
+	<div class='page-title'>{{ peli.titulo }}</div>
 
-<div class="informacion-pelicula">
-	<img src="{{ url_for('static', filename='img/' + peli.poster) }}" alt="{{ peli.titulo }}">
-	<div class="descripcion-pelicula">
-		<p><b>Precio: </b>{{ peli.precio }}€</p><br>
-		<p><b>Calificacion media: </b>
-			<svg viewBox="0 0 1000 200" class='rating' id="stars-datail">
-                <defs>
+	<div class="informacion-pelicula">
+		<img src="{{ url_for('static', filename='img/' + peli.poster) }}" alt="{{ peli.titulo }}">
+		<div class="descripcion-pelicula">
+			<p><b>Precio: </b>{{ peli.precio }}€</p>
+			<p><b>Calificacion media: </b>
+				<svg viewBox="0 0 1000 200" class='rating' id="stars-datail">
+					<defs>
 
-                    <polygon id="star" points="100,0 131,66 200,76 150,128 162,200 100,166 38,200 50,128 0,76 69,66 " />
+						<polygon id="star"
+							points="100,0 131,66 200,76 150,128 162,200 100,166 38,200 50,128 0,76 69,66 " />
 
-                    <clipPath id="stars">
-                        <use xlink:href="#star" />
-                        <use xlink:href="#star" x="20%" />
-                        <use xlink:href="#star" x="40%" />
-                        <use xlink:href="#star" x="60%" />
-                        <use xlink:href="#star" x="80%" />
-                    </clipPath>
+						<clipPath id="stars">
+							<use xlink:href="#star" />
+							<use xlink:href="#star" x="20%" />
+							<use xlink:href="#star" x="40%" />
+							<use xlink:href="#star" x="60%" />
+							<use xlink:href="#star" x="80%" />
+						</clipPath>
 
-                </defs>
+					</defs>
 
-                <rect class='rating__background' clip-path="url(#stars)"></rect>
+					<rect class='rating__background' clip-path="url(#stars)"></rect>
 
-                <!-- Change the width of this rect to change the rating -->
-                <rect width="{{ (peli.valoracion * 20) }}%" class='rating__value' clip-path="url(#stars)"></rect>
+					<!-- Change the width of this rect to change the rating -->
+					<rect width="{{ (peli.valoracion * 20) }}%" class='rating__value' clip-path="url(#stars)"></rect>
 
-            </svg>
-			{{ '%0.1f'| format(peli.valoracion|float) }}/5
+				</svg>
+				{{ '%0.1f'| format(peli.valoracion|float) }}/5
+
+			</p>
+			<p><b>Fecha: </b>{{ peli.año }}</p>
+			<p><b>Sinopsis: </b>{{ peli.sinopsis }}</p>
+			<p><b>Criticas: </b>{{ peli.criticas }}</p>
+		</div>
+		<div>
+			<button type="button" class="add-to-cart" id="add-to-cart-{{ peli.id }}">Añadir al carrito</button>
+		</div>
+	</div>
+
+	<div class="stars">
 		
-		</p><br>
-		<p><b>Fecha: </b>{{ peli.año }}</p><br>
-		<p><b>Sinopsis: </b>{{ peli.sinopsis }}</p><br>
-		<p><b>Criticas: </b>{{ peli.criticas }}</p><br>
+		<form action="">
+			<input class="star star-5" id="star-5" type="radio" name="star" value="1" />
+			<label class="star star-5" for="star-5"></label>
+			<input class="star star-4" id="star-4" type="radio" name="star" value="2" />
+			<label class="star star-4" for="star-4"></label>
+			<input class="star star-3" id="star-3" type="radio" name="star" value="3" />
+			<label class="star star-3" for="star-3"></label>
+			<input class="star star-2" id="star-2" type="radio" name="star" value="4" />
+			<label class="star star-2" for="star-2"></label>
+			<input class="star star-1" id="star-1" type="radio" name="star" value="5" />
+			<label class="star star-1" for="star-1"></label>
+		</form>
 	</div>
-	<div>
-		<button type="button" class="add-to-cart" id="add-to-cart-{{ peli.id }}">Añadir al carrito</button>
-	</div>
-</div>
-
-<div class="stars">
-	<form action="">
-		<input class="star star-5" id="star-5" type="radio" name="star" value="1" />
-		<label class="star star-5" for="star-5"></label>
-		<input class="star star-4" id="star-4" type="radio" name="star" value="2" />
-		<label class="star star-4" for="star-4"></label>
-		<input class="star star-3" id="star-3" type="radio" name="star" value="3" />
-		<label class="star star-3" for="star-3"></label>
-		<input class="star star-2" id="star-2" type="radio" name="star" value="4" />
-		<label class="star star-2" for="star-2"></label>
-		<input class="star star-1" id="star-1" type="radio" name="star" value="5" />
-		<label class="star star-1" for="star-1"></label>
-	</form>
-</div>
 </div>
 {% endblock %}
