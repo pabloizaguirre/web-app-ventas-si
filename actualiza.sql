@@ -275,9 +275,22 @@ ALTER TABLE ONLY public.ratings
 -------------------------------------------------------------------------
 -- INSERTING BALANCE COLUMN IN CUSTOMERS TABLE
 
+CREATE OR REPLACE FUNCTION setCostumersBalance(initialBalance integer) 
+   RETURNS INTEGER AS
+$$
+BEGIN
+   RETURN floor(random()* (initialBalance-0 + 1) + 0);
+END;
+$$ language 'plpgsql' STRICT;
+
+
+
 -- Creating column
 ALTER TABLE public.customers
-ADD balance INTEGER SELECT * FROM setCostumersBalance(50);
+ADD COLUMN balance INTEGER NOT NULL DEFAULT setCostumersBalance(100);
+
+
+ 
 -----------------------------------------------------------------------
 
 
@@ -323,12 +336,3 @@ SELECT orderdetail.orderid,
 FROM products, orders, orderdetail
 WHERE products.prod_id=orderdetail.prod_id
     AND orders.orderid=orderdetail.orderid;
-
-
-CREATE OR REPLACE FUNCTION setCostumersBalance(initialBalance integer) 
-   RETURNS INTEGER AS
-$$
-BEGIN
-   RETURN floor(random()* (initialBalance-0 + 1) + 0);
-END;
-$$ language 'plpgsql' STRICT;
