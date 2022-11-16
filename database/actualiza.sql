@@ -1,3 +1,10 @@
+------- Modificaciones de la base de datos -------
+
+-- Quitamos las filas de la tabla imdb_movies donde el valor de year es 1998-1999
+update imdb_movies
+set year = 1999
+where year = '1998-1999';
+
 -- AÑADIMOS FOREIGN KEY A ORDERS
 ALTER TABLE customers
 	ALTER COLUMN password TYPE VARCHAR(96);
@@ -336,3 +343,4 @@ SELECT orderdetail.orderid,
 FROM products, orders, orderdetail
 WHERE products.prod_id=orderdetail.prod_id
     AND orders.orderid=orderdetail.orderid;
+

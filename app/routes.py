@@ -52,9 +52,7 @@ def login():
 		session.modified=True        
 		# print a error.log de Apache si se ejecuta bajo mod_wsgi
 		print (request.referrer, file=sys.stderr)
-		print("asdasdasd")
 		if 'lastUser' in request.cookies:
-			print("bvbvbvb")
 			print(request.cookies.get('lastUser'))
 			return render_template('login.html', title = "Sign In", user = request.cookies.get('lastUser') )
 		return render_template('login.html', title = "Sign In")
