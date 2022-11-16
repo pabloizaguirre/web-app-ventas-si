@@ -7,8 +7,8 @@ begin
         UPDATE orders
         SET netamount=S.sum_price
         FROM (
-            SELECT orderid, sum(price) AS sum_price
-            FROM orderdetail
+            SELECT orderid, sum(totalprice) AS sum_price
+            FROM (select orderid, price * quantity as totalprice from orderdetail) as totalpriceorder
             GROUP BY orderid
         ) S
         WHERE orders.orderid=S.orderid;
