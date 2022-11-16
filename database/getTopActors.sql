@@ -1,11 +1,11 @@
-CREATE OR REPLACE FUNCTION getTopActors(
-    genre CHAR,
-    OUT Actor varchar,
-    OUT Num bigINT,
-    OUT Debut text,
-    OUT Film varCHAR,
-    OUT Director varCHAR
-) RETURNS SETOF record AS $$ BEGIN RETURN QUERY (
+create or replace function gettopactors(
+    genre char,
+    out actor varchar,
+    out num bigint,
+    out debut text,
+    out film varchar,
+    out director varchar
+) returns setof record as $$ begin return query (
     select
         actorname as actor,
         numfilms as num,
@@ -16,12 +16,12 @@ CREATE OR REPLACE FUNCTION getTopActors(
         (
             select
                 actorid,
-                MIN(year) as minyear,
+                min(year) as minyear,
                 numfilms
             from
                 (
                     select
-                        Count(*) as numfilms,
+                        count(*) as numfilms,
                         actorid
                     from
                         imdb_actormovies natural
@@ -32,7 +32,7 @@ CREATE OR REPLACE FUNCTION getTopActors(
                     group by
                         actorid
                     having
-                        Count(*) > 4
+                        count(*) > 4
                     order by
                         count(*) desc
                 ) as topactors natural
@@ -57,6 +57,6 @@ CREATE OR REPLACE FUNCTION getTopActors(
         numfilms desc
 );
 
-END;
+end;
 
-$$ LANGUAGE plpgsql;
+$$ language plpgsql;

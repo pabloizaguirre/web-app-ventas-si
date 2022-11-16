@@ -3,7 +3,7 @@
 UPDATE
     public.orderdetail
 SET
-    price = public.products.price*(1 + 0.02*(EXTRACT(year FROM public.orders.orderdate) - CAST(public.imdb_movies.year AS int)))
+    price = ROUND(public.products.price*(1 + 0.02*(EXTRACT(year FROM public.orders.orderdate) - CAST(public.imdb_movies.year AS int))), 2)
 FROM
     public.products, public.imdb_movies, public.orders
 
