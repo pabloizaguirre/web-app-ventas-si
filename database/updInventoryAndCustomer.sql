@@ -18,7 +18,7 @@ BEGIN
         WHERE prod_id=rec.prod_id;
         
         UPDATE customer
-        SET balance = balance-rec2.price
+        SET balance = balance-rec.price
         WHERE customerid=rec2.customerid;
 
     END LOOP;
