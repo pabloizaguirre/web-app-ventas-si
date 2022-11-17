@@ -26,10 +26,21 @@ ALTER TABLE customers
 ADD CONSTRAINT email_unique
 UNIQUE (email);
 
+/* -- to delete all duplicated customers
+delete from customers
+where (username) in (select username
+	from customers 
+	group by username
+	having COUNT(*) > 1); */
+
+/* ALTER TABLE customers 
+ADD CONSTRAINT username_unique
+UNIQUE (username); */
+
 -- Adding foreign key in orders
 ALTER TABLE orders
 ADD CONSTRAINT orders_customerid_fkey
-FOREIGN KEY (customerid) REFERENCES customers(customerid); -- no action
+FOREIGN KEY (customerid) REFERENCES customers(customerid) ON DELETE CASCADE;
 
 -- Adding primary key in actormovies
 ALTER TABLE imdb_actormovies

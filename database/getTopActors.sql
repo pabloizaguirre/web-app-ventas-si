@@ -1,4 +1,4 @@
-create or replace function gettopactors(
+create or replace function getTopActors(
     genre char,
     out actor varchar,
     out num bigint,

@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from app import app
+from app import app, database
 from flask import render_template, request, url_for, redirect, session, jsonify, make_response
 from app.busquedapelicula import filtrar_busqueda, filtrar_categoria
-from app.usuario import crearUsuario, comprobacionUsuario, get_tarjeta
 from app.compra import ejecutar_compra, introducir_saldo, precio_total_carrito, getHistorial, saldo_from_file
 import json
 import os
 import sys
 from collections import Counter
 import random
+
 
 catalogue_data = open(os.path.join(app.root_path,'inventario/inventario.json'), encoding="utf-8").read()
 catalogue = json.loads(catalogue_data)
@@ -37,14 +37,15 @@ def login():
 	# doc sobre request object en http://flask.pocoo.org/docs/1.0/api/#incoming-request-data
 	if 'username' in request.form:
 		try:
-			comprobacionUsuario(request.form['username'], request.form['password'])
-			session['usuario'] = request.form['username']
+			customerid = database.comprobacionUsuario(request.form['username'], request.form['password'])
+			session['usuario'] = customerid
 			session.modified=True
 			# se puede usar request.referrer para volver a la pagina desde la que se hizo login
 			response = make_response(redirect(url_for('index')))
-			response.set_cookie('lastUser', session['usuario'])
+			response.set_cookie('lastUser', request.form['username'])
 			return response
 		except Exception as error:
+			print(error)
 			return render_template('login.html', title = "Sign In", mensaje_error=error)
 	else:
 		# se puede guardar la pagina desde la que se invoca 
@@ -68,8 +69,8 @@ def logout():
 def registro():
 	if request.method == 'POST':
 		try: 
-			crearUsuario(request.form.to_dict())
-			session['usuario'] = request.form['usuario']
+			result = database.crearUsuario(request.form.to_dict())
+			session['usuario'] = result
 			return redirect(url_for('index'))
 
 		except Exception as error:
@@ -95,7 +96,7 @@ def historial():
 def saldo():
 	if request.method == 'POST':
 		introducir_saldo(float(request.form['saldo']))
-		num_tarjeta = get_tarjeta()
+		num_tarjeta = session['usuario']['creditcard']
 		return render_template('saldo.html', title="Saldo", saldo=saldo_from_file(), mensaje="Se ha hecho un cargo de " + request.form['saldo'] + "€ en la tarjeta: ************" + num_tarjeta[-5:-1])
 	return render_template('saldo.html', title="Saldo", saldo=saldo_from_file())
 
@@ -199,4 +200,4 @@ def introducir_valoracion():
 
 @app.route('/_get_saldo', methods=['GET', 'POST'])
 def get_saldo():
-	return jsonify(result=saldo_from_file())
+	return jsonify(result=session['usuario']['saldo'])

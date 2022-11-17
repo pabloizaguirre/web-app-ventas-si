@@ -23,7 +23,7 @@
         <span class="usuario-header">No se ha iniciado sesión</span>
         {% else %}
         <script>actualizarSaldo()</script>
-        <span class="usuario-header">Usuario: {{ session['usuario'] }}</span>
+        <span class="usuario-header">Usuario: {{ session['usuario']['username'] }}</span>
         {% endif%}
     </div>
 
