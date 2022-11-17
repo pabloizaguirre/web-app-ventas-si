@@ -1,6 +1,7 @@
 import random
 from sqlalchemy import create_engine, MetaData
 import os
+from flask import session
 
 db_engine = create_engine('postgresql://alumnodb:@localhost:5432/si1', echo=False)
 db_meta = MetaData(bind=db_engine)
@@ -76,3 +77,59 @@ def crearUsuario(form):
         print(e)
         raise Exception("Error al crear el usuario")
 
+def introducir_saldo(cantidad):
+    db_conn = None
+    db_conn = db_engine.connect()
+    query = "UPDATE public.customers SET balance = balance + " + str(cantidad) + " WHERE customerid = " + str(session['usuario']['customerid'])
+    db_conn.execute(query)
+    db_conn.close()
+    session['usuario']['saldo'] += cantidad
+    return 
+
+# return the 10 most popular movies
+def getCatalogue():
+    db_conn = None
+    db_conn = db_engine.connect()
+    query = "select * from imdb_movies \
+            natural join (select movieid, SUM(sales) as sales from products group by movieid) as allsales \
+            order by sales desc \
+            limit 10"
+    
+    result = db_conn.execute(query).all()
+
+    catalogue = {"peliculas": dict(zip([film.movieid for film in result], [dict(film) for film in result]))}
+
+    print(catalogue)
+    return catalogue
+
+# Obtener todas las categorias de la tabla genres
+def getCategorias():
+    db_conn = None
+    db_conn = db_engine.connect()
+    query = "select * from genres"
+    categorias = []
+    for categoria in db_conn.execute(query).all():
+        categorias.append(categoria.genre)
+    db_conn.close()
+    return categorias
+
+def getPelicula(id):
+    db_conn = None
+    db_conn = db_engine.connect()
+    query = "select * from imdb_movies where movieid = " + str(id)
+    result = db_conn.execute(query).first()
+    db_conn.close()
+    return dict(result)
+
+def updateValoracion(movieid, valoracion, customerid):
+    db_conn = None
+    db_conn = db_engine.connect()
+    query = "select * from ratings where customerid = " + str(customerid) + " and movieid = " + str(movieid)
+    result = db_conn.execute(query).first()
+    if result:
+        query = "update ratings set rating = " + str(valoracion) + " where customerid = " + str(customerid) + " and movieid = " + str(movieid)
+    else:
+        query = "insert into ratings (customerid, movieid, rating) values (" + str(customerid) + ", " + str(movieid) + ", " + str(valoracion) + ")"
+    db_conn.execute(query)
+    db_conn.close()
+    return

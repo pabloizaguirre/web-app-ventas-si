@@ -11,16 +11,15 @@ import sys
 from collections import Counter
 import random
 
-
-catalogue_data = open(os.path.join(app.root_path,'inventario/inventario.json'), encoding="utf-8").read()
-catalogue = json.loads(catalogue_data)
+catalogue = database.getCatalogue()
 
 @app.route('/', methods = ['GET', 'POST'])
 @app.route('/index', methods = ['GET', 'POST'])
 def index():
 	# Creamos la lista con las categorias de peliculas
-	categorias = list(set(map(lambda x: x['categoria'], catalogue['peliculas'].values())))
-
+	categorias = database.getCategorias()
+	catalogue = database.getCatalogue()
+	
 	if request.method == 'POST':
 		if 'texto_busqueda' in request.form:
 			filtracion = filtrar_busqueda(catalogue['peliculas'], request)
@@ -95,10 +94,10 @@ def historial():
 @app.route('/saldo', methods=['GET', 'POST'])
 def saldo():
 	if request.method == 'POST':
-		introducir_saldo(float(request.form['saldo']))
+		database.introducir_saldo(float(request.form['saldo']))
 		num_tarjeta = session['usuario']['creditcard']
-		return render_template('saldo.html', title="Saldo", saldo=saldo_from_file(), mensaje="Se ha hecho un cargo de " + request.form['saldo'] + "€ en la tarjeta: ************" + num_tarjeta[-5:-1])
-	return render_template('saldo.html', title="Saldo", saldo=saldo_from_file())
+		return render_template('saldo.html', title="Saldo", saldo=session['usuario']['saldo'], mensaje="Se ha hecho un cargo de " + request.form['saldo'] + "€ en la tarjeta: ************" + num_tarjeta[-5:-1])
+	return render_template('saldo.html', title="Saldo", saldo=session['usuario']['saldo'])
 
 
 @app.route('/descripcion/<id_pelicula>', methods=['GET', 'POST'])
@@ -117,12 +116,12 @@ def descripcion(id_pelicula):
 		
 		return redirect(url_for('descripcion', id_pelicula=id_pelicula))
 	
-	listaPeliculas = catalogue["peliculas"]
-	if not id_pelicula in listaPeliculas:
-		
+	pelicula = database.getPelicula(id_pelicula)
+	print(pelicula)
+	if not pelicula:
 		return redirect(url_for("index"))
-
-	return render_template('descripcion.html', title = listaPeliculas[id_pelicula]['titulo'], peli = listaPeliculas[id_pelicula])
+	
+	return render_template('descripcion.html', title = pelicula['movietitle'], peli = pelicula)
 	
 """ Funciones AJAX """
 
@@ -179,24 +178,14 @@ def introducir_valoracion():
 	valoracion = request.args.get('valoracion', type=int)
 	id = request.args.get('film_id', type=str)
 
-	if('valoraciones' not in session):
-		session['valoraciones'] = [id]
-	elif(id in session['valoraciones']):
-		return jsonify(valorada=1)
-	else:
-		session['valoraciones'].append(id)
+	if 'usuario' not in session:
+		return jsonify(usuario=0)
 
-	valoracion_antigua = catalogue['peliculas'][id]['valoracion']
-	num_val = catalogue['peliculas'][id]['numeroValoraciones']
-	nueva_valoracion = (valoracion_antigua*num_val + valoracion)/(num_val + 1)
+	database.updateValoracion(id, valoracion, session['usuario']['customerid'])
 
-	catalogue['peliculas'][id]['valoracion'] = nueva_valoracion
-	catalogue['peliculas'][id]['numeroValoraciones'] = num_val + 1
+	catalogue = database.getCatalogue()
 
-	with open(os.path.join(app.root_path,'inventario/inventario.json'), 'w', encoding="utf-8") as catalogueFile:
-		json.dump(catalogue, catalogueFile, indent=4)
-
-	return jsonify(valorada=0)
+	return jsonify(usuario=1,valorada=0)
 
 @app.route('/_get_saldo', methods=['GET', 'POST'])
 def get_saldo():

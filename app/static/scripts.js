@@ -119,6 +119,10 @@ $(function () {
             valoracion: valoracion,
             film_id: window.location.pathname.split('/').slice(-1)[0]
         }, function (data) {
+            if (data.usuario == 0) {
+                displayMessage('Es necesario iniciar sesión para valorar películas', error = true);
+                return false;
+            }
             if (data.valorada) {
                 displayMessage('Ya has valorado esta pelicula', error = true);
                 return false;

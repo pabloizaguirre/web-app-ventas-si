@@ -7,12 +7,15 @@
 {% block content%}
 
 <div class="page-content">
-	<div class='page-title'>{{ peli.titulo }}</div>
+	<div class='page-title'>{{ peli.movietitle }}</div>
 
 	<div class="informacion-pelicula">
-		<img src="{{ url_for('static', filename='img/' + peli.poster) }}" alt="{{ peli.titulo }}">
+		{% if peli.poster %}
+			<img src="{{ url_for('static', filename='img/' + peli.poster) }}" alt="{{ peli.titulo }}>
+		{% else %}
+			<img src="{{ url_for('static', filename='img/default.png') }}">
+		{% endif %}
 		<div class="descripcion-pelicula">
-			<p><b>Precio: </b>{{ peli.precio }}€</p>
 			<p><b>Calificacion media: </b>
 				<svg viewBox="0 0 1000 200" class='rating' id="stars-datail">
 					<defs>
@@ -33,21 +36,28 @@
 					<rect class='rating__background' clip-path="url(#stars)"></rect>
 
 					<!-- Change the width of this rect to change the rating -->
-					<rect width="{{ (peli.valoracion * 20) }}%" class='rating__value' clip-path="url(#stars)"></rect>
-
+					
+					{% if not peli.ratingmean %}
+						<rect width="0%" class='rating__value' clip-path="url(#stars)"></rect>
+					{% else %}
+						<rect width="{{ (peli.ratingmean * 20) }}%" class='rating__value' clip-path="url(#stars)"></rect>
+					{% endif %}
 				</svg>
-				{{ '%0.1f'| format(peli.valoracion|float) }}/5
+				{% if not peli.ratingmean %}
+					<p>No hay valoraciones todavía.</p>
+				{% else %}
+					{{ '%0.1f'| format(peli.ratingmean|float) }}/5
+				{% endif %}
+				
 
 			</p>
-			<p><b>Fecha: </b>{{ peli.año }}</p>
-			<p><b>Sinopsis: </b>{{ peli.sinopsis }}</p>
-			<p><b>Criticas: </b>{{ peli.criticas }}</p>
+			<p><b>Año: </b>{{ peli.year }}</p>
 		</div>
 		<div>
 			<button type="button" class="add-to-cart" id="add-to-cart-{{ peli.id }}">Añadir al carrito</button>
 		</div>
 	</div>
-
+	
 	<div class="stars">
 		
 		<form action="">

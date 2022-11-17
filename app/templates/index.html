@@ -26,11 +26,15 @@
     </div>
     {% endif %}
     {% for item in movies.values() %}
-    <div class="movie-container" , id="{{ item.id }}"
-        onclick="location.href='{{ url_for('descripcion', id_pelicula = item.id)  }}';">
-        <img src=" {{ url_for('static', filename='img/' + item.poster) }} ">
+    <div class="movie-container" , id="{{ item.movieid }}"
+        onclick="location.href='{{ url_for('descripcion', id_pelicula = item.movieid)  }}';">
+        {% if item.poster %}
+            <img src=" {{ url_for('static', filename='img/' + item.poster) }} ">
+        {% else %}
+            <img src=" {{ url_for('static', filename='img/default.png') }} ">
+        {% endif %}
         <div class="movie-container-texto">
-            <span class="movie-container-title">{{ item.titulo }}</span>
+            <span class="movie-container-title">{{ item.movietitle }}</span>
             <p class='movie-container-sinopsis'>
                 {{ item.sinopsis }}
             </p>
@@ -53,7 +57,12 @@
                 <rect class='rating__background' clip-path="url(#stars)"></rect>
 
                 <!-- Change the width of this rect to change the rating -->
-                <rect width="{{ (item.valoracion * 20) }}%" class='rating__value' clip-path="url(#stars)"></rect>
+                {% if not item.ratingmean %}
+                    <rect width="0%" class='rating__value' clip-path="url(#stars)"></rect>
+                {% else %}
+                    <rect width="{{ (item.ratingmean * 20) }}%" class='rating__value' clip-path="url(#stars)"></rect>
+                {% endif %}
+                
 
             </svg>
         </div>
