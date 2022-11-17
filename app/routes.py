@@ -123,7 +123,7 @@ def descripcion(id_pelicula):
 		return redirect(url_for('descripcion', id_pelicula=id_pelicula))
 	
 	pelicula = database.getPelicula(id_pelicula)
-	print(pelicula)
+	
 	if not pelicula:
 		return redirect(url_for("index"))
 	

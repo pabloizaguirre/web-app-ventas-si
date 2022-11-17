@@ -13,8 +13,6 @@ ALTER TABLE imdb_movies
 	ADD COLUMN ratingmean NUMERIC,
 	ADD COLUMN ratingcount NUMERIC;
 	
-	
---CREACION DE LA TABLA STATUS PARA EL ESTADO DEL PEDIDO
 CREATE TABLE public.ratings( --usuario+pelicula = rating
 	customerid integer NOT NULL,
 	movieid	integer NOT NULL,
@@ -25,17 +23,6 @@ CREATE TABLE public.ratings( --usuario+pelicula = rating
 ALTER TABLE customers
 ADD CONSTRAINT email_unique
 UNIQUE (email);
-
-/* -- to delete all duplicated customers
-delete from customers
-where (username) in (select username
-	from customers 
-	group by username
-	having COUNT(*) > 1); */
-
-/* ALTER TABLE customers 
-ADD CONSTRAINT username_unique
-UNIQUE (username); */
 
 -- Adding foreign key in orders
 ALTER TABLE orders

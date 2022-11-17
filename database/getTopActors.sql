@@ -24,9 +24,9 @@ create or replace function getTopActors(
                         count(*) as numfilms,
                         actorid
                     from
-                        imdb_actormovies natural
-                        join imdb_moviegenres natural
-                        join genres
+                        imdb_actormovies 
+                        natural join imdb_moviegenres 
+                        natural join genres
                     where
                         genres.genre = $1
                     group by
@@ -35,22 +35,22 @@ create or replace function getTopActors(
                         count(*) > 4
                     order by
                         count(*) desc
-                ) as topactors natural
-                join imdb_actormovies natural
-                join imdb_movies natural
-                join imdb_moviegenres natural
-                join genres
+                ) as topactors 
+                natural join imdb_actormovies 
+                natural join imdb_movies 
+                natural join imdb_moviegenres 
+                natural join genres
             where
                 genres.genre = $1
             group by
                 actorid,
                 numfilms
-        ) as actoryeardebut natural
-        join imdb_actors natural
-        join imdb_actormovies natural
-        join imdb_movies natural
-        join imdb_directormovies natural
-        join imdb_directors
+        ) as actoryeardebut 
+        natural join imdb_actors 
+        natural join imdb_actormovies 
+        natural join imdb_movies 
+        natural join imdb_directormovies 
+        natural join imdb_directors
     where
         year = minyear
     order by
