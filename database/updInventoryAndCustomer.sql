@@ -19,7 +19,7 @@ BEGIN
         
         UPDATE customer
         SET balance = balance-rec.price
-        WHERE customerid=rec2.customerid;
+        WHERE customerid=rec.customerid;
 
     END LOOP;
    
