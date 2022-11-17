@@ -2,7 +2,7 @@
 /* Carrito */
 
 $(function () {
-    $('.add-to-cart, .add-to-cart-plus').bind('click', function () {
+    $('.add-to-cart-plus').bind('click', function () {
         const film_id = $(this).attr('id').split("-").slice(-1)[0]
         $.getJSON($SCRIPT_ROOT + '/_add_to_cart',
             { film_id: film_id },
@@ -15,6 +15,19 @@ $(function () {
         else {
             displayMessage('Añadido al carrito')
         }
+        return false;
+    });
+});
+
+$(function () {
+    $('.add-to-cart').bind('click', function () {
+        const prod_id = document.getElementById('descripcion-productos').value()
+        print(prod_id)
+        $.getJSON($SCRIPT_ROOT + '/_add_to_cart',
+            { prod_id: prod_id },
+            function (data) { });
+
+        displayMessage('Añadido al carrito')
         return false;
     });
 });

@@ -99,7 +99,6 @@ def getCatalogue():
 
     catalogue = {"peliculas": dict(zip([film.movieid for film in result], [dict(film) for film in result]))}
 
-    print(catalogue)
     return catalogue
 
 # Obtener todas las categorias de la tabla genres
@@ -132,4 +131,20 @@ def updateValoracion(movieid, valoracion, customerid):
         query = "insert into ratings (customerid, movieid, rating) values (" + str(customerid) + ", " + str(movieid) + ", " + str(valoracion) + ")"
     db_conn.execute(query)
     db_conn.close()
+    return
+
+# Obtener todos los productos de la tabla products con un determinado movieid
+def getProductosPelicula(movieid):
+    db_conn = None
+    db_conn = db_engine.connect()
+    query = "select * from products where movieid = " + str(movieid)
+    productos = []
+    for producto in db_conn.execute(query).all():
+        productos.append(dict(producto))
+    db_conn.close()
+    return productos
+
+# Obtener el precio total del carrito
+
+def addToCart(prod_id, customerid):
     return

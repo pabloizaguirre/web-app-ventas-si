@@ -385,3 +385,7 @@ table, th, td {
 	position: fixed;
 	right: 1em;
 }
+
+#descripcion-productos {
+	margin-bottom: 1em;
+}

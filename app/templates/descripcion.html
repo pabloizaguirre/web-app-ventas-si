@@ -53,6 +53,12 @@
 			</p>
 			<p><b>Año: </b>{{ peli.year }}</p>
 		</div>
+		<select name="productos" id="descripcion-productos">
+			<p></p>
+            {% for producto in productos %}
+            <option value="{{ producto.prod_id }}">{{ producto.description }}, {{ producto.price }}€</option>
+            {% endfor %}
+        </select>
 		<div>
 			<button type="button" class="add-to-cart" id="add-to-cart-{{ peli.id }}">Añadir al carrito</button>
 		</div>

@@ -19,7 +19,7 @@ def index():
 	# Creamos la lista con las categorias de peliculas
 	categorias = database.getCategorias()
 	catalogue = database.getCatalogue()
-	
+
 	if request.method == 'POST':
 		if 'texto_busqueda' in request.form:
 			filtracion = filtrar_busqueda(catalogue['peliculas'], request)
@@ -83,7 +83,7 @@ def carrito():
 	total = 0
 
 	if 'carrito' in session:
-		total = precio_total_carrito(session['carrito'], catalogue['peliculas'])
+		total = database.precio_total_carrito(session['carrito'], catalogue['peliculas'])
 
 	return render_template('carrito.html', title = "Carrito", movies=catalogue['peliculas'], total=total)
 
@@ -121,7 +121,9 @@ def descripcion(id_pelicula):
 	if not pelicula:
 		return redirect(url_for("index"))
 	
-	return render_template('descripcion.html', title = pelicula['movietitle'], peli = pelicula)
+	productos = database.getProductosPelicula(id_pelicula)
+
+	return render_template('descripcion.html', title = pelicula['movietitle'], peli = pelicula, productos = productos)
 	
 """ Funciones AJAX """
 
@@ -131,14 +133,17 @@ def return_random_number():
 
 @app.route('/_add_to_cart', methods=['GET', 'POST'])
 def add_to_cart():
-	id_pelicula = request.args.get('film_id', type=str)
-
-	if 'carrito' in session:
-		session['carrito'][id_pelicula] += 1
-		session.modified=True
+	id_producto = request.args.get('prod_id', type=str)
+	
+	if 'usuario' not in session:
+		if 'carrito' in session:
+			session['carrito'][id_producto] += 1
+			session.modified=True
+		else:
+			session['carrito'] = Counter([id_producto])
+			session.modified=True
 	else:
-		session['carrito'] = Counter([id_pelicula])
-		session.modified=True
+		database.addToCart(id_producto, session['usuario']['customerid'])
 		
 	return jsonify(result=1)
 
