@@ -144,7 +144,35 @@ def getProductosPelicula(movieid):
     db_conn.close()
     return productos
 
-# Obtener el precio total del carrito
-
 def addToCart(prod_id, customerid):
+    # Comprobar si este customer tiene un order con status NULL
+    db_conn = None
+    db_conn = db_engine.connect()
+    query = "select * from orders where customerid = " + str(customerid) + " and status is NULL"
+    result = db_conn.execute(query).first()
+    # Cuando no existe un carrito 
+    if not result:
+        # Conseguir el ultimo orderid
+        query = "select * from orders order by orderid desc limit 1"
+        result = db_conn.execute(query).first()
+        if not result:
+            orderid = 1
+        else:
+            orderid = result.orderid + 1
+        
+        query = "insert into orders (orderid, orderdate, customerid, netamount, tax, totalamount, status) values (" + str(orderid) + ", now(), " + str(customerid) + ", 0, 21, 0, NULL)"
+        db_conn.execute(query)
+    else:
+        orderid = result.orderid
+    
+    # Comprobar que no hay un orderdetail con prod_id y orderid
+    query = "select * from orderdetail where orderid = " + str(orderid) + " and prod_id = " + str(prod_id)
+    result = db_conn.execute(query).first()
+    if result:
+        query = "update orderdetail set quantity = quantity + 1 where orderid = " + str(orderid) + " and prod_id = " + str(prod_id)
+        db_conn.execute(query)
+    else:
+        query = "insert into orderdetail (orderid, prod_id, price, quantity) values (" + str(orderid) + ", " + str(prod_id) + ", (select price from products where prod_id = " + str(prod_id) + "), 1)"
+        db_conn.execute(query)
+
     return

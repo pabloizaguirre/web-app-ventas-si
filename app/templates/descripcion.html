@@ -53,8 +53,7 @@
 			</p>
 			<p><b>Año: </b>{{ peli.year }}</p>
 		</div>
-		<select name="productos" id="descripcion-productos">
-			<p></p>
+		<select id="descripcion-productos">
             {% for producto in productos %}
             <option value="{{ producto.prod_id }}">{{ producto.description }}, {{ producto.price }}€</option>
             {% endfor %}

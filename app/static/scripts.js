@@ -21,12 +21,12 @@ $(function () {
 
 $(function () {
     $('.add-to-cart').bind('click', function () {
-        const prod_id = document.getElementById('descripcion-productos').value()
-        print(prod_id)
+        const prod_id = $('#descripcion-productos option:selected').val()
+        console.log(prod_id)
         $.getJSON($SCRIPT_ROOT + '/_add_to_cart',
             { prod_id: prod_id },
             function (data) { });
-
+            
         displayMessage('Añadido al carrito')
         return false;
     });
