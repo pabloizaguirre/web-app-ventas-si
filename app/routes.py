@@ -39,6 +39,8 @@ def login():
 			customerid = database.comprobacionUsuario(request.form['username'], request.form['password'])
 			session['usuario'] = customerid
 			session.modified=True
+			if 'carrito' in session:
+				database.introducirCarritoDB(session['carrito'])
 			# se puede usar request.referrer para volver a la pagina desde la que se hizo login
 			response = make_response(redirect(url_for('index')))
 			response.set_cookie('lastUser', request.form['username'])
@@ -70,6 +72,9 @@ def registro():
 		try: 
 			result = database.crearUsuario(request.form.to_dict())
 			session['usuario'] = result
+			session.modified = True
+			if 'carrito' in session:
+				database.introducirCarritoDB(session['carrito'])
 			return redirect(url_for('index'))
 
 		except Exception as error:
@@ -81,11 +86,12 @@ def registro():
 @app.route('/carrito', methods=['GET', 'POST'])
 def carrito():
 	total = 0
+	
+	carrito = database.getCarrito()
 
-	if 'carrito' in session:
-		total = database.precio_total_carrito(session['carrito'], catalogue['peliculas'])
+	total = database.precioTotalCarrito(carrito)
 
-	return render_template('carrito.html', title = "Carrito", movies=catalogue['peliculas'], total=total)
+	return render_template('carrito.html', title = "Carrito", total=total, carrito = carrito)
 
 @app.route('/historial', methods=['GET', 'POST'])
 def historial():
@@ -149,25 +155,30 @@ def add_to_cart():
 
 @app.route('/_remove_from_cart', methods=['GET', 'POST'])
 def remove_from_cart():
-	id_pelicula = request.args.get('film_id', type=str)
-
-	if 'carrito' in session:
-		if session['carrito'][id_pelicula] > 1:
-			session['carrito'][id_pelicula] -= 1
-			session.modified=True
+	id_producto = request.args.get('prod_id', type=str)
+	if 'usuario' not in session:
+		if 'carrito' in session:
+			if session['carrito'][id_producto] > 1:
+				session['carrito'][id_producto] -= 1
+				session.modified=True
+			else:
+				del session['carrito'][id_producto]
+				session.modified=True
+				if not session['carrito']:
+					session.pop('carrito', None)
 		else:
-			del session['carrito'][id_pelicula]
+			session['carrito'] = Counter([id_producto])
 			session.modified=True
-			if not session['carrito']:
-				session.pop('carrito', None)
 	else:
-		session['carrito'] = Counter([id_pelicula])
-		session.modified=True
+		database.removeFromCart(id_producto, session['usuario']['customerid'])
+
 	return jsonify(result=1)
 
 @app.route('/_vaciar_carrito', methods=['GET', 'POST'])
 def vaciar_carrito():
 	session.pop('carrito', None)
+	if 'usuario' in session:
+		database.vaciarCarrito(session['usuario']['customerid'])
 	return jsonify(result=1)
 
 @app.route('/_finalizar_compra', methods=['GET', 'POST'])

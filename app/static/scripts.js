@@ -3,18 +3,11 @@
 
 $(function () {
     $('.add-to-cart-plus').bind('click', function () {
-        const film_id = $(this).attr('id').split("-").slice(-1)[0]
+        const prod_id = $(this).attr('id').split("-").slice(-1)[0]
         $.getJSON($SCRIPT_ROOT + '/_add_to_cart',
-            { film_id: film_id },
-            function (data) { });
-
-        if ($(this).attr('class').split(' ')[0] == 'add-to-cart-plus') {
-            const num = $('#cart-count-' + film_id).text()
-            location.reload();
-        }
-        else {
-            displayMessage('Añadido al carrito')
-        }
+            { prod_id: prod_id },
+            function (data) {location.reload()});
+        
         return false;
     });
 });
@@ -34,14 +27,13 @@ $(function () {
 
 $(function () {
     $('.remove-from-cart').bind('click', function () {
-        const film_id = $(this).attr('id').split("-").slice(-1)[0]
+        const prod_id = $(this).attr('id').split("-").slice(-1)[0]
         $.getJSON($SCRIPT_ROOT + '/_remove_from_cart',
-            { film_id: film_id },
-            function (data) { });
-        const num = parseInt($('#cart-count-' + film_id).text())
-        if (num > 0) {
-            location.reload();
-        }
+            { prod_id: prod_id },
+            function (data) { 
+                location.reload();
+            });
+        
         return false;
     });
 });
@@ -50,8 +42,7 @@ $(function () {
     $('button.vaciar-carrito').bind('click', function () {
         $.getJSON($SCRIPT_ROOT + '/_vaciar_carrito',
             {},
-            function (data) { });
-        location.reload();
+            function (data) {location.reload();});
         return false;
     });
 

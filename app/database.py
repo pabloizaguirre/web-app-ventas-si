@@ -1,3 +1,4 @@
+from collections import Counter
 import random
 from sqlalchemy import create_engine, MetaData
 import os
@@ -74,7 +75,6 @@ def crearUsuario(form):
         return dict(zip(keys, list(result)))
     
     except Exception as e:
-        print(e)
         raise Exception("Error al crear el usuario")
 
 def introducir_saldo(cantidad):
@@ -175,4 +175,79 @@ def addToCart(prod_id, customerid):
         query = "insert into orderdetail (orderid, prod_id, price, quantity) values (" + str(orderid) + ", " + str(prod_id) + ", (select price from products where prod_id = " + str(prod_id) + "), 1)"
         db_conn.execute(query)
 
+    return
+
+def removeFromCart(prod_id, customerid):
+    db_conn = None
+    db_conn = db_engine.connect()
+    # Comprobar si hay un orderdetail con prod_id y orderid
+    query = "select * from orderdetail natural join orders natural join customers where customerid=" + str(customerid) + "and prod_id=" + str(prod_id) + "and status is NULL"
+    result = db_conn.execute(query).first()
+    if result:
+        query = "update orderdetail set quantity = quantity - 1 where orderid = " + str(result.orderid) + " and prod_id = " + str(prod_id)
+        db_conn.execute(query)
+        if result.quantity == 1:
+            query = "delete from orderdetail where orderid = " + str(result.orderid) + " and prod_id = " + str(prod_id)
+            db_conn.execute(query)
+    return
+
+def vaciarCarrito(customerid):
+    db_conn = None
+    db_conn = db_engine.connect()
+    query = "delete from orderdetail where orderid in (select orderid from orders where customerid = " + str(customerid) + " and status is NULL)"
+    db_conn.execute(query)
+    return
+    
+
+def precioTotalCarrito(carrito): 
+    if not carrito:
+        return 0
+    return sum([producto['orderprice'] * producto['quantity'] for producto in carrito])
+
+def getCarrito():
+    db_conn = None
+    db_conn = db_engine.connect()
+    if 'usuario' not in session:
+        if 'carrito' in session:
+            carrito = session['carrito']
+        else:
+            carrito = Counter()
+        # Cogemos toda la informacion del carrito
+        productos = []
+        for prod_id, cantidad in carrito.items():
+            query = "select price as orderprice, movietitle, movieid, description from products natural join imdb_movies where prod_id = " + str(prod_id)
+            result = db_conn.execute(query).first()
+            productos.append({'prod_id': prod_id, 'movietitle': result.movietitle, 'movieid': result.movieid, 'description': result.description, 'orderprice': result.orderprice, 'quantity': cantidad})
+        return productos
+
+    query = "select orderdetail.price as orderprice, quantity, movietitle, orderdetail.prod_id, movieid, description \
+            from orderdetail \
+                natural join orders \
+                natural join customers \
+                join products on products.prod_id=orderdetail.prod_id \
+                natural join imdb_movies \
+            where customerid=" + str(session['usuario']['customerid']) + " and status is NULL"
+    result = db_conn.execute(query).all()
+    if not result:
+        return []
+    carrito = []
+    for producto in result:
+        carrito.append(dict(producto))
+    db_conn.close()
+    return carrito
+
+def introducirCarritoDB(carrito):
+    for prod_id, cantidad in carrito.items():
+        db_conn = None
+        db_conn = db_engine.connect()
+        # Obtener los orderdetail con prod_id y customerid=session['usuario']['customerid']
+        query = "select * from orderdetail natural join orders natural join customers where customerid=" + str(session['usuario']['customerid']) + "and prod_id=" + str(prod_id) + "and status is NULL"
+        result = db_conn.execute(query).first()
+        if result:
+            cantidad = max(cantidad, result.quantity)
+            query = "update orderdetail set quantity =  " + str(cantidad) + " where orderid = " + str(result.orderid) + " and prod_id = " + str(prod_id)
+            db_conn.execute(query)
+        else:
+            for _ in range(cantidad):
+                addToCart(prod_id, session['usuario']['customerid'])
     return

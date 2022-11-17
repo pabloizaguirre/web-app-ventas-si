@@ -14,12 +14,12 @@
     </script>
     {% endif %}
 
-    {% if 'carrito' in session %}
+    {% if carrito %}
     <button type="button" class="vaciar-carrito">Vaciar</button>
     {% endif %}
 
     <div>
-        {% if not 'carrito' in session %}
+        {% if not carrito %}
         <div class='comment'> Carrito vacio </div>
         {% else %}
         <table class="no-bottom-border">
@@ -28,26 +28,26 @@
             <td class="cart-element">Unidades</td>
             <td class="cart-element"></td>
 
-            {% for (id, num) in session['carrito'].items() %}
+            {% for producto in carrito %}
 
             <tr>
                 <td class="cart-element">
-                    <a href="{{ url_for('descripcion', id_pelicula = id) }}">
-                        {{ movies[id].titulo }}
+                    <a href="{{ url_for('descripcion', id_pelicula = producto['movieid']) }}">
+                        {{ producto.movietitle }} edición {{ producto.description }}
 
                     </a>
                 </td>
                 <td class="cart-element">
-                    {{ movies[id].precio ~ '€'}}
+                    {{ producto.orderprice ~ '€'}}
                 </td>
                 <td class="cart-element">
-                    <span class="cart-count" id="cart-count-{{ id }}">{{ num }} </span>
+                    <span class="cart-count" id="cart-count-{{ producto.prod_id }}">{{ producto.quantity }} </span>
                 </td>
                 <td class="cart-element">
                     <button type="button" class="add-to-cart-plus small-button"
-                        id="add-to-cart-plus-{{ id }}">+</button>
+                        id="add-to-cart-plus-{{ producto.prod_id }}">+</button>
                     <button type="button" class="remove-from-cart small-button"
-                        id="remove-from-cart-{{ id }}">-</button>
+                        id="remove-from-cart-{{ producto.prod_id }}">-</button>
                 </td>
             </tr>
 
@@ -59,7 +59,7 @@
         </table>
         {% endif %}
     </div>
-    {% if 'carrito' in session %}
+    {% if carrito %}
     <button type="button" id="finalizar-compra" class="green-button">Finalizar compra</button>
     {% endif %}
 
