@@ -10,15 +10,15 @@ ALTER TABLE customers
 	ALTER COLUMN password TYPE VARCHAR(96);
 	
 ALTER TABLE imdb_movies 
-	ADD COLUMN ratingmean INTEGER,
-	ADD COLUMN ratingcount INTEGER;
+	ADD COLUMN ratingmean NUMERIC,
+	ADD COLUMN ratingcount NUMERIC;
 	
 	
 --CREACION DE LA TABLA STATUS PARA EL ESTADO DEL PEDIDO
 CREATE TABLE public.ratings( --usuario+pelicula = rating
 	customerid integer NOT NULL,
 	movieid	integer NOT NULL,
-	rating integer
+	rating NUMERIC
 );
 
 -- Setting customer username to be unique
